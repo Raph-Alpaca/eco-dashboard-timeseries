@@ -7,7 +7,7 @@ export async function render({ main, sub, app }) {
   await app.ensureCubes("status_survey", ["inst_school", "inst_local", "inst_early", "inst_public"]);
   const sc = app.codebooks.school_survey, st = app.codebooks.status_survey;
   const S = app.cubes.student, T = app.cubes.teacher, SCH = app.cubes.inst_school, LOC = app.cubes.inst_local, ECE = app.cubes.inst_early, PUB = app.cubes.inst_public;
-  const g = (cube, key) => cube.aggregate(key, { by: [] })?.groups?.[0];
+  const g = (cube, key) => app.aggregate(cube.pop, key, { by: [] })?.groups?.[0];
   const instTotal = Object.values(st.populations).reduce((a, p) => a + (p.participation?.responded ?? p.n), 0);
 
   const kpis = [

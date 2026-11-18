@@ -27,7 +27,7 @@ export async function render({ main, sub, app }) {
       <div class="table-wrap"><table class="data"><thead><tr><th>조사</th><th>대상</th><th>단위 수</th><th>저장 축</th><th>설명</th></tr></thead><tbody>
         ${popRows.map(r => `<tr><td>${esc(r.survey)}</td><td>${esc(r.label)}${r.census ? ' <span class="badge good">공표값 그대로</span>' : ""}</td><td>${r.n.toLocaleString()}</td><td>${esc(r.dims)}</td><td>${esc(r.note)}</td></tr>`).join("")}
       </tbody></table></div>
-      <p style="margin-top:8px">각 패널 아래의 <span class="badge neutral">공표 축</span> 배지가 그 문항에서 보고서에 실제로 공표된 분해 축입니다. 그 축별 값은 보고서와 ±1명(±반 단위 반올림) 안에서 같습니다. 공표되지 않은 축(학년·시도·성별 등)은 상위 집단과 같은 분포로 채웠으므로 <b>차이가 없습니다</b> — 보고서에 없는 값을 만들어내지 않기 위한 선택이며, 실데이터에서는 실제 차이가 그대로 표시됩니다.</p>
+      <p style="margin-top:8px">각 패널 아래의 <span class="badge neutral">공표 축</span> 배지가 그 문항에서 보고서에 실제로 공표된 분해 축입니다. 보고서에 인쇄된 집단(전체, 공표 축 하나)의 값은 <b>인쇄값을 그대로</b> 보여 주고 <span class="badge pubval">보고서 공표값</span> 배지를 붙입니다. 필터를 걸거나 두 축을 교차하면 보고서에 없는 조합이므로 합성 데이터로 계산하고 <span class="badge synthetic">합성 데이터</span> 배지를 붙입니다. 공표되지 않은 축(학년·시도·성별 등)은 상위 집단과 같은 분포로 채웠으므로 <b>차이가 없습니다</b> — 보고서에 없는 값을 만들어내지 않기 위한 선택이며, 실데이터에서는 실제 차이가 그대로 표시됩니다.</p>
       <h3>3. 합성 방법(요약)</h3>
       <ul>
         <li>응답자·기관 목록(프레임)은 보고서의 응답자 특성표·표본 설계표와 같은 구성으로 만듭니다.</li>
@@ -35,7 +35,8 @@ export async function render({ main, sub, app }) {
         <li>한 응답자의 잠재변수가 모든 문항에 들어가므로 문항 간 상관이 생깁니다(그 크기는 실제와 다를 수 있음). 공표되지 않은 축에는 어떤 체계적 차이도 넣지 않았습니다.</li>
         <li>기관별 값이 그대로 공표된 전수 유형(중앙행정기관 6, 광역지자체 17, 시도교육청 17)은 합성하지 않고 공표 행을 그대로 적재했습니다.</li>
         <li>유아·초중등 실태조사는 표본에 설계가중치(모집단/표본)를 주어 보고서의 가중 추정치와 같게 맞췄습니다.</li>
-        <li>검증: 큐브에서 다시 집계한 값과 공표값을 <b>${manifest ? "자동" : ""} 비교</b>한 결과가 저장소의 <code>data/validation_report.md</code>에 있습니다(8천여 개 비교, 소집단 ±1단위 반올림 수준의 차이만 잔존).</li>
+        <li>검증: 합성 큐브를 다시 집계한 값과 공표값의 차이는 저장소의 <code>data/validation_report.md</code>에 있습니다(8천여 개 비교 중 허용오차 초과 243건 — 주로 소집단과 평균값). 이 차이가 화면에 나타나지 않도록, 공표된 집단은 합성값 대신 인쇄값을 씁니다(자동 검사 <code>tests/pubmerge.test.mjs</code>: 1만 3천여 개 값 일치).</li>
+        <li>전사 감사: 전사한 숫자가 인용한 보고서 쪽의 본문에 있는지 대조한 결과가 <code>data/audit_report.md</code>에 있습니다. 2024년 실태조사 전사본은 작성자와 다른 검증자가 쪽 이미지로 전수 대조했습니다.</li>
       </ul>
       <h3>4. 억제 규칙</h3>
       <ul><li>사람 단위 조사(현황조사): 집단의 응답 수가 30명 미만이면 값을 표시하지 않습니다(‘–’). 화면의 표시 규칙일 뿐 보안 장치는 아니며, 실데이터에서는 큐브를 만들 때 미리 마스킹·축 축소를 합니다.</li>

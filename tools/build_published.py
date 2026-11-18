@@ -192,6 +192,15 @@ def build(check_only=False):
                               "note": lp.get("note", ""), "trendAxes": lp.get("trendAxes"),
                               "years": [y for y in YEARS if qs.get(y) is not None], "items": items}
         index["summary"][pop] = counts
+    # 현황조사(단년도): 추이는 없지만 2025년 화면이 공표값을 그대로 쓰도록 같은 형태로 내보낸다
+    school = load(ROOT / "data" / "codebook" / "base_school.json")
+    for pop, pdef in school["populations"].items():
+        order, qmap = [], {}
+        for name in pdef.get("sources", []):
+            for t in load(SRC / name)["tables"]:
+                order.append(t["qid"])
+                qmap[t["qid"]] = norm_question(t)
+        docs[(2025, pop)] = {"schemaVersion": 1, "survey": "school_survey", "pop": pop, "year": 2025, "order": order, "questions": qmap}
     for e in errors:
         print("[오류]", e)
     for w in warns:

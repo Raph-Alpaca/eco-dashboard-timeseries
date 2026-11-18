@@ -86,3 +86,20 @@ data/codebook/base_*.json + data/source/*.json ──(tools/build_codebook.py)�
 - `tools/validate.py` — 큐브 재집계 vs 공표값(`data/validation_report.md`)
 - `tests/test_build_cubes.py` — 큐브 생성기 단위 테스트(조건부·가중·건 기준·마스킹·드라이런)
 - `tests/aggregate.test.mjs` — JS 집계와 파이썬 집계의 패리티
+
+## 공표값 저장소와 연도 간 문항 대응 (실태조사 2024→2025)
+
+```
+data/source/s2_*.json (2025)  ─┐
+data/source/2024/s2_*.json     ├─(tools/build_published.py)─▶ data/published/<연도>/<pop>.json ─▶ 추이·연도 보기, 공표값 우선 표시
+data/link/status_survey.json  ─┘                              data/published/index.json (대응 색인)
+```
+
+- **공표값 저장소** `data/published/<연도>/<pop>.json`: `{schemaVersion, survey, pop, year, order:[qid…], questions:{qid: {…전사 표 그대로…, axes, hasAll}}}`. 숫자는 전사본과 같고(다시 계산하지 않음), 여부형 문항의 `positive`가 비어 있으면 인쇄된 `pct`에서 가져옵니다. 현황조사(2025)의 `student.json`·`teacher.json`도 같은 형태로 들어 있습니다.
+- **문항 대응표** `data/link/status_survey.json` (사람이 관리): 기관별 `items[qid] = {status, reason | wording, all?, axes?}` 와 `trendAxes`(이을 축 제한), `note`.
+  - `status`: `same`(동일) · `wording`(문구만 다름 — 두 해 설문 문구 `wording.2024/2025/diff` 필수) · `changed`(범위·정의 변경) · `base`(분모 다름) · `cats`(보기 다름) · `unit`(단위·산출 기준 다름) · `struct`(표 구성 다름). 한 해에만 있는 문항은 자동으로 `only2024`/`only2025`.
+  - 대응표에 없는 문항은 생성기가 유형·보기·기준을 비교해 자동 판정합니다. `same`/`wording`으로 적었는데 형식이 다르면 생성이 오류로 멈춥니다.
+  - 잇는 것은 `same`·`wording`뿐이고, 두 해 모두 공표된 집단(전체·공표 축)만 잇습니다. `all:false`, `axes:[…]`로 문항별로 좁힐 수 있습니다.
+- **대응 색인** `data/published/index.json`: 연도 정보(`years[]`: 기준일·출처·참여 현황·가중 방식), 축 라벨, 기관별 문항 상태(`pops[pop].items[qid]`)와 집계(`summary`).
+- **공표값 우선 표시**(`js/pubmerge.js`): 2025년 화면에서 필터가 없고 비교 축이 0~1개이며 그 집단의 값이 보고서에 인쇄되어 있으면, 합성 큐브 집계값을 인쇄값으로 덮어씁니다. 그 밖의 조합은 합성값 그대로입니다.
+- 실데이터로 바꿀 때는 연도별 큐브에서 같은 형태의 `data/published` 파일을 만들면 화면은 그대로 동작합니다.

@@ -10,6 +10,7 @@ import { chartOn, disposeChart, optionFromAgg, optionBattery, tableOf, downloadC
 import { fmtInt, fmt } from "./aggregate.js";
 import { reportState, onReportChange, panelId, toast, storageWorks } from "./state.js";
 import { keyOptions } from "./data.js";
+import { mergePublished, publishedCovers } from "./pubmerge.js";
 
 export const ICONS = {
   gear: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>',
@@ -35,17 +36,24 @@ const observer = new IntersectionObserver(entries => {
 export function createPanel(cfg, ctx) { return new Panel(cfg, ctx); }
 
 /** cfg 와 필터로 집계한다(패널·보고서 공용). 비교 축에 걸린 필터는 빼서 그 축의 전체 범주를 보여 준다. */
-export function computePanel(cfg, cube, cb, { filters = {}, suppression } = {}) {
+export function computePanel(cfg, cube, cb, { filters = {}, suppression, published } = {}) {
   if (!cube) return null;
   const f = effectiveFilters(cfg, filters);
   const opt = { filters: f, by: cfg.by || [], suppression, kind: cb.kind };
+  // 보고서에 인쇄된 집단(전체·공표 축 하나, 필터 없음)은 인쇄값으로 덮어쓴다 — js/pubmerge.js
+  const merged = k => { const a = cube.aggregate(k, opt); return a ? mergePublished(a, published?.[a.q?.qid], { filters: f, by: a.by }) : null; };
   const q = cube.questions[cfg.key];
   if (q && q.type.startsWith("item_")) {
-    const aggs = q.cubeKeys.map(k => cube.aggregate(k, opt)).filter(Boolean);
+    const aggs = q.cubeKeys.map(merged).filter(Boolean);
     return { battery: true, aggs, q, filters: f };
   }
-  const agg = cube.aggregate(cfg.key, opt);
+  const agg = merged(cfg.key);
   return agg ? { battery: false, agg, q: agg.q, filters: f } : null;
+}
+/** 지금 보여 주는 값이 전부 보고서 공표값인가 */
+export function isPublishedView(cfg, res) {
+  const m = measureOfPanel(cfg, res);
+  return (res.battery ? res.aggs : [res.agg]).every(a => publishedCovers(a, m));
 }
 /** 필터 막대 값 + 패널에 고정된 필터, 비교 축 제외, 빈 값 제외 */
 export function effectiveFilters(cfg, barFilters = {}) {
@@ -165,7 +173,7 @@ export class Panel {
 
   /** 현재 cfg·필터로 집계 */
   compute() {
-    return computePanel(this.cfg, this.cube, this.cb, { filters: this.ctx.filtersOf?.(this.cfg.pop) || {}, suppression: this.ctx.suppression });
+    return computePanel(this.cfg, this.cube, this.cb, { filters: this.ctx.filtersOf?.(this.cfg.pop) || {}, suppression: this.ctx.suppression, published: this.ctx.publishedOf?.(this.cfg.pop) });
   }
 
   update() {
@@ -205,7 +213,8 @@ export class Panel {
     this.el.querySelector(".src").textContent = cap.src;
     const badges = this.el.querySelector(".badges");
     badges.innerHTML = "";
-    if (this.ctx.synthetic) badges.innerHTML += `<span class="badge synthetic" title="보고서 공표값에 맞춘 합성 데이터입니다">합성 데이터</span> `;
+    if (isPublishedView(this.cfg, res)) badges.innerHTML += `<span class="badge pubval" title="이 집단의 값은 보고서에 인쇄되어 있어 그 값을 그대로 보여 줍니다">보고서 공표값</span> `;
+    else if (this.ctx.synthetic) badges.innerHTML += `<span class="badge synthetic" title="보고서에 인쇄되지 않은 조합이라 공표값에 맞춘 합성 데이터로 계산했습니다">합성 데이터</span> `;
     if (q?.publishedBy?.length) {
       const pub = q.publishedBy.map(a => this.cb.dims[a]?.label || a).join("·");
       badges.innerHTML += `<span class="badge neutral" title="보고서에 이 축별 값이 공표되어 있어 그 값에 맞춰 생성했습니다. 다른 축은 상위 집단과 같은 분포로 채워 차이가 없습니다.">공표 축: ${pub}</span>`;

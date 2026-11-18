@@ -2,7 +2,8 @@
  * app.js — 진입점. 해시 라우팅(#overview, #school/student, #status/inst_school, #analysis, #report, #about),
  * 필터 막대, 패널 그리드 관리, 데이터 로딩을 담당한다.
  */
-import { loadCodebook, loadCube, config } from "./data.js";
+import { loadCodebook, loadCube, loadPublished, config } from "./data.js";
+import { mergePublished } from "./pubmerge.js";
 import { filterState, layoutState, reportState, onReportChange, toast } from "./state.js";
 import { createPanel } from "./panel.js";
 import { DEFAULT_LAYOUTS } from "./layouts.js";
@@ -27,6 +28,7 @@ export const app = {
   config,
   codebooks: {},
   cubes: {},
+  published: {},   // pop → 2025년 공표값(문항별) — 공표된 집단의 화면값을 보고서 값으로 맞추는 데 쓴다
   activePanels: [],
   current: null,
 
@@ -35,8 +37,19 @@ export const app = {
     return this.codebooks[surveyId];
   },
   async ensureCube(surveyId, pop) {
-    if (!this.cubes[pop]) this.cubes[pop] = await loadCube(surveyId, pop);
+    if (!this.cubes[pop]) {
+      const [cube, pub] = await Promise.all([loadCube(surveyId, pop), loadPublished(2025, pop).catch(() => null)]);
+      this.published[pop] = pub ? pub.questions : null;
+      this.cubes[pop] = cube;
+    }
     return this.cubes[pop];
+  },
+  /** 큐브 집계 + 공표값 덮어쓰기(공표된 집단만) */
+  aggregate(pop, key, opt = {}) {
+    const cube = this.cubes[pop];
+    const agg = cube?.aggregate(key, opt);
+    if (!agg) return null;
+    return mergePublished(agg, this.published[pop]?.[agg.q?.qid], { filters: opt.filters || {}, by: agg.by });
   },
   async ensureCubes(surveyId, pops) {
     await this.ensureSurvey(surveyId);
@@ -52,6 +65,7 @@ export const app = {
     const sup = this.config.suppression || {};
     return {
       cubeOf: pop => this.cubes[pop],
+      publishedOf: pop => this.published[pop],
       codebook: id => this.codebooks[id || surveyId],
       filtersOf: pop => filterState.get(pop),
       suppression: { minN: sup.person?.minN ?? 30, unstableN: sup.weighted?.unstableN ?? 10 },

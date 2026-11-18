@@ -32,7 +32,7 @@ async function resolveItem(app, it) {
   const cb = app.codebooks[cfg.survey];
   if (!cube || !cb) throw new Error("데이터를 찾지 못했습니다");
   const sup = app.config.suppression || {};
-  const res = computePanel(cfg, cube, cb, { filters: {}, suppression: { minN: sup.person?.minN ?? 30, unstableN: sup.weighted?.unstableN ?? 10 } });
+  const res = computePanel(cfg, cube, cb, { filters: {}, suppression: { minN: sup.person?.minN ?? 30, unstableN: sup.weighted?.unstableN ?? 10 }, published: app.published[cfg.pop] });
   const groups = res && (res.battery ? res.aggs[0]?.groups : res.agg.groups);
   if (!res || !groups || !groups.length) throw new Error("표시할 데이터가 없습니다");
   return { ...captionOf(cfg, cube, cb, res), option: optionOfPanel(cfg, res), height: chartHeightOf(cfg, res), table: tableOfPanel(cfg, cb, res), csv: csvRows(cfg, cube, cb, res) };

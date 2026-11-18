@@ -67,7 +67,7 @@ async function renderCompare({ main, app, cb }) {
       sec.className = "panel span-6";
       const rows = [];
       let measure = "mean", ordered = true;
-      const agg = (cube, key) => cube.aggregate(key, { filters: { ...filters }, by: [] })?.groups?.[0];
+      const agg = (cube, key) => app.aggregate(cube.pop, key, { filters: { ...filters }, by: [] })?.groups?.[0];
       if (qs.type.startsWith("item_")) {
         measure = qs.type === "item_likert5" ? "mean" : "positive"; ordered = qs.type === "item_likert5";
         const map = pair.itemMap || Object.fromEntries(qs.items.map(it => [it.id, it.id]));
