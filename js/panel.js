@@ -8,7 +8,7 @@
  */
 import { chartOn, disposeChart, optionFromAgg, optionBattery, tableOf, downloadCSV, exportPNG, autoChart, autoMeasure, measureLabel, positiveLabel } from "./charts.js";
 import { fmtInt, fmt } from "./aggregate.js";
-import { reportState, onReportChange, panelId, toast } from "./state.js";
+import { reportState, onReportChange, panelId, toast, storageWorks } from "./state.js";
 import { keyOptions } from "./data.js";
 
 export const ICONS = {
@@ -33,6 +33,90 @@ const observer = new IntersectionObserver(entries => {
 }, { rootMargin: "240px 0px" });
 
 export function createPanel(cfg, ctx) { return new Panel(cfg, ctx); }
+
+/** cfg 와 필터로 집계한다(패널·보고서 공용). 비교 축에 걸린 필터는 빼서 그 축의 전체 범주를 보여 준다. */
+export function computePanel(cfg, cube, cb, { filters = {}, suppression } = {}) {
+  if (!cube) return null;
+  const f = effectiveFilters(cfg, filters);
+  const opt = { filters: f, by: cfg.by || [], suppression, kind: cb.kind };
+  const q = cube.questions[cfg.key];
+  if (q && q.type.startsWith("item_")) {
+    const aggs = q.cubeKeys.map(k => cube.aggregate(k, opt)).filter(Boolean);
+    return { battery: true, aggs, q, filters: f };
+  }
+  const agg = cube.aggregate(cfg.key, opt);
+  return agg ? { battery: false, agg, q: agg.q, filters: f } : null;
+}
+/** 필터 막대 값 + 패널에 고정된 필터, 비교 축 제외, 빈 값 제외 */
+export function effectiveFilters(cfg, barFilters = {}) {
+  const f = { ...barFilters, ...(cfg.filters || {}) };
+  for (const a of cfg.by || []) delete f[a];
+  for (const a of Object.keys(f)) if (!f[a] || !f[a].length) delete f[a];
+  return f;
+}
+export function measureOfPanel(cfg, res) {
+  if (cfg.measure) return cfg.measure;
+  if (res.battery) return res.q.type === "item_likert5" ? "mean" : "positive";
+  const chart = cfg.chart && cfg.chart !== "auto" ? cfg.chart : autoChart(res.agg, cfg);
+  return autoMeasure(res.agg, chart);
+}
+/** 제목·부제(대상·축·사례 수·값 종류·필터)·출처 문구 */
+export function captionOf(cfg, cube, cb, res) {
+  const q = res.q;
+  const meta = res.battery ? null : cube.keyMeta(cfg.key);
+  let title = cfg.title;
+  if (!title) {
+    if (meta?.item) title = `${q.short} — ${meta.item.label}`;
+    else if (meta?.rank) title = `${q.short} (${{ r1: "1순위", r12: "1+2순위", r123: "1+2+3순위" }[meta.rank]})`;
+    else title = q?.short || q?.label || cfg.key;
+  }
+  const groups = res.battery ? res.aggs[0]?.groups || [] : res.agg.groups;
+  const n = groups.reduce((a, g) => a + g.n, 0);
+  const wn = groups.reduce((a, g) => a + (g.base || 0), 0);
+  const popLabel = cb.populations[cfg.pop]?.label || cfg.pop;
+  const byLabel = (cfg.by || []).map(a => cb.dims[a]?.label || a).join(" × ");
+  const parts = [popLabel, byLabel ? `${byLabel}별` : "전체", `n=${fmtInt(n)}${cube.weighted ? ` (가중 ${fmtInt(wn)})` : ""}`];
+  parts.push(measureLabel(measureOfPanel(cfg, res), res.battery ? res.aggs[0] : res.agg));
+  if (q?.base) parts.push("조건부 문항");
+  const ftxt = Object.entries(res.filters || {}).map(([a, codes]) => {
+    const dim = cb.dims[a]; const names = new Map(dim?.codes || []);
+    return `${dim?.label || a} ${codes.map(c => names.get(c) || c).join("·")}`;
+  }).join(", ");
+  if (ftxt) parts.push(`필터: ${ftxt}`);
+  if (groups.some(g => g.suppressed)) parts.push("일부 집단 n<30 표시 안 함");
+  const srcs = (q?.source || []).map(s => `${s.ref} (PDF p.${s.pdf})`).join(", ");
+  return { title, sub: parts.join(" · "), src: srcs ? `출처: ${cb.shortTitle} ${srcs}` : "" };
+}
+/** 차트 종류에 맞는 높이(px) */
+export function chartHeightOf(cfg, res) {
+  const firstAgg = res.battery ? res.aggs[0] : res.agg;
+  const groups = firstAgg.groups;
+  const chart = cfg.chart && cfg.chart !== "auto" ? cfg.chart : (res.battery ? "hbar" : autoChart(firstAgg, cfg));
+  const nItems = res.battery ? res.aggs.length : (chart === "hbar" ? firstAgg.categories.length : groups.length);
+  let h = 260;
+  if (chart === "tile") h = 440;
+  else if (chart === "hbar" || res.battery) h = Math.max(240, 24 * nItems * Math.max(1, Math.min(groups.length, 3)) + 70);
+  else if (chart === "stack") h = Math.max(200, 36 * groups.length + 90);
+  return Math.min(h, 600);
+}
+export function optionOfPanel(cfg, res) {
+  const measure = measureOfPanel(cfg, res);
+  if (res.battery) return optionBattery(res.aggs, cfg, measure);
+  return optionFromAgg(res.agg, { ...cfg, measure });
+}
+/** 표 데이터 {columns, rows} */
+export function tableOfPanel(cfg, cb, res) {
+  const dimLabels = Object.fromEntries(Object.entries(cb.dims).map(([k, v]) => [k, v.label]));
+  if (res.battery) {
+    const measure = measureOfPanel(cfg, res);
+    const groups = res.aggs[0].groups;
+    const columns = ["항목", ...groups.map(g => (g.labels.length ? g.labels.join(" · ") : "전체") + (measure === "mean" ? " 평균" : " %"))];
+    const rows = res.aggs.map(a => ({ cells: [a.item?.label || a.key, ...a.groups.map(g => (g.suppressed || g.empty ? "–" : (measure === "mean" ? fmt(g.mean, 2) : fmt(g.positive ?? g.pct?.[cfg.cat ?? 0], 1))))] }));
+    rows.push({ cells: ["응답 수", ...groups.map(g => fmtInt(g.n))], total: true });
+    return { columns, rows };
+  }
+  return tableOf(res.agg, cfg, dimLabels);
+}
 
 export class Panel {
   constructor(cfg, ctx) {
@@ -81,18 +165,7 @@ export class Panel {
 
   /** 현재 cfg·필터로 집계 */
   compute() {
-    const cube = this.cube;
-    if (!cube) return null;
-    const filters = { ...(this.ctx.filtersOf?.(this.cfg.pop) || {}), ...(this.cfg.filters || {}) };
-    for (const a of this.cfg.by || []) delete filters[a]; // 비교 축은 전체 범주를 보여준다
-    const opt = { filters, by: this.cfg.by, suppression: this.ctx.suppression, kind: this.cb.kind };
-    if (this.isBattery) {
-      const q = cube.questions[this.cfg.key];
-      const aggs = q.cubeKeys.map(k => cube.aggregate(k, opt)).filter(Boolean);
-      return { battery: true, aggs, q };
-    }
-    const agg = cube.aggregate(this.cfg.key, opt);
-    return agg ? { battery: false, agg, q: agg.q } : null;
+    return computePanel(this.cfg, this.cube, this.cb, { filters: this.ctx.filtersOf?.(this.cfg.pop) || {}, suppression: this.ctx.suppression });
   }
 
   update() {
@@ -100,17 +173,13 @@ export class Panel {
     this.renderHeader();
     if (this.visible) this.renderChart();
     if (this.showTable) this.renderTable();
+    this.syncReportBtn();   // 필터가 바뀌면 '담김' 표시도 달라진다(필터까지 같은 항목만 담긴 것으로 본다)
   }
 
   titleText() {
     const res = this.last;
     if (!res) return this.cfg.title || this.cfg.key;
-    const q = res.q;
-    const meta = res.battery ? null : this.cube.keyMeta(this.cfg.key);
-    if (this.cfg.title) return this.cfg.title;
-    if (meta?.item) return `${q.short} — ${meta.item.label}`;
-    if (meta?.rank) return `${q.short} (${{ r1: "1순위", r12: "1+2순위", r123: "1+2+3순위" }[meta.rank]})`;
-    return q?.short || q?.label || this.cfg.key;
+    return captionOf(this.cfg, this.cube, this.cb, res).title;
   }
 
   renderHeader() {
@@ -121,17 +190,8 @@ export class Panel {
     h3.textContent = this.titleText();
     if (!res) { sub.textContent = ""; return; }
     const q = res.q;
-    const groups = res.battery ? res.aggs[0]?.groups || [] : res.agg.groups;
-    const n = groups.reduce((a, g) => a + g.n, 0);
-    const wn = groups.reduce((a, g) => a + (g.base || 0), 0);
-    const popLabel = this.cb.populations[this.cfg.pop]?.label || this.cfg.pop;
-    const byLabel = (this.cfg.by || []).map(a => this.cb.dims[a]?.label || a).join(" × ");
-    const parts = [popLabel, byLabel ? `${byLabel}별` : "전체", `n=${fmtInt(n)}${this.cube.weighted ? ` (가중 ${fmtInt(wn)})` : ""}`];
-    const measure = this.currentMeasure(res);
-    parts.push(measureLabel(measure, res.battery ? res.aggs[0] : res.agg));
-    if (q?.base) parts.push("조건부 문항");
-    if (groups.some(g => g.suppressed)) parts.push("일부 집단 n<30 표시 안 함");
-    sub.textContent = parts.join(" · ");
+    const cap = captionOf(this.cfg, this.cube, this.cb, res);
+    sub.textContent = cap.sub;
     // 비공표 축 안내: 보고서에 없는 분해이면 합성 데이터에서는 상위 집단과 같은 분포(차이 없음)
     const pubAxes = new Set(q?.publishedBy || []);
     const parentOf = { grade: "level", sido: "region5s", region5s: "level", region5: "metro", metro: "region5", urban: "level", gender: "level", tenure: "level", role: "level", coord: "level" };
@@ -142,28 +202,19 @@ export class Panel {
       const labels = unpub.map(a => this.cb.dims[a]?.label || a).join("·");
       warn.textContent = `${labels}별 값은 보고서에 공표되지 않았습니다. 합성 데이터에서는 상위 집단과 같은 분포로 채워 차이가 없습니다. 실데이터에서는 실제 차이가 표시됩니다.`;
     } else warn?.remove();
-    const src = (q?.source || []).map(s => `${s.ref} (PDF p.${s.pdf})`).join(", ");
-    this.el.querySelector(".src").textContent = src ? `출처: ${this.cb.shortTitle} ${src}` : "";
+    this.el.querySelector(".src").textContent = cap.src;
     const badges = this.el.querySelector(".badges");
     badges.innerHTML = "";
     if (this.ctx.synthetic) badges.innerHTML += `<span class="badge synthetic" title="보고서 공표값에 맞춘 합성 데이터입니다">합성 데이터</span> `;
     if (q?.publishedBy?.length) {
       const pub = q.publishedBy.map(a => this.cb.dims[a]?.label || a).join("·");
-      badges.innerHTML += `<span class="badge neutral" title="보고서에 이 축별 값이 공표되어 있어 그 값에 맞춰 생성했습니다. 다른 축의 차이는 임의 생성입니다.">공표 축: ${pub}</span>`;
+      badges.innerHTML += `<span class="badge neutral" title="보고서에 이 축별 값이 공표되어 있어 그 값에 맞춰 생성했습니다. 다른 축은 상위 집단과 같은 분포로 채워 차이가 없습니다.">공표 축: ${pub}</span>`;
     }
   }
 
-  currentMeasure(res) {
-    if (this.cfg.measure) return this.cfg.measure;
-    if (res.battery) return res.q.type === "item_likert5" ? "mean" : "positive";
-    const chart = this.cfg.chart !== "auto" ? this.cfg.chart : autoChart(res.agg, this.cfg);
-    return autoMeasure(res.agg, chart);
-  }
+  currentMeasure(res) { return measureOfPanel(this.cfg, res); }
 
-  buildOption(res) {
-    if (res.battery) return optionBattery(res.aggs, this.cfg, this.currentMeasure(res));
-    return optionFromAgg(res.agg, { ...this.cfg, measure: this.cfg.measure || this.currentMeasure(res) });
-  }
+  buildOption(res) { return optionOfPanel(this.cfg, res); }
 
   renderChart() {
     const res = this.last || this.compute();
@@ -181,13 +232,7 @@ export class Panel {
       return showEmpty(groups.every(g => g.empty) ? "선택한 조건에 해당하는 응답이 없습니다" : "응답 수가 30명 미만이어서 값을 표시하지 않습니다(억제 규칙)");
     }
     empty?.remove();
-    const firstAgg = res.battery ? res.aggs[0] : res.agg;
-    const chart = this.cfg.chart !== "auto" ? this.cfg.chart : (res.battery ? "hbar" : autoChart(firstAgg, this.cfg));
-    const nItems = res.battery ? res.aggs.length : (chart === "hbar" ? firstAgg.categories.length : groups.length);
-    let h = 260;
-    if (chart === "tile") h = 440;
-    else if (chart === "hbar" || res.battery) h = Math.max(240, 24 * nItems * Math.max(1, Math.min(groups.length, 3)) + 70);
-    else if (chart === "stack") h = Math.max(200, 36 * groups.length + 90);
+    const h = chartHeightOf(this.cfg, res);
     chartEl.style.height = `${Math.min(h, 600)}px`;
     this.option = this.buildOption(res);
     const ch = chartOn(chartEl, this.option);
@@ -207,17 +252,7 @@ export class Panel {
 
   tableData() {
     const res = this.last || this.compute();
-    if (!res) return null;
-    const dimLabels = Object.fromEntries(Object.entries(this.cb.dims).map(([k, v]) => [k, v.label]));
-    if (res.battery) {
-      const measure = this.currentMeasure(res);
-      const groups = res.aggs[0].groups;
-      const columns = ["항목", ...groups.map(g => (g.labels.length ? g.labels.join(" · ") : "전체") + (measure === "mean" ? " 평균" : " %"))];
-      const rows = res.aggs.map(a => ({ cells: [a.item?.label || a.key, ...a.groups.map(g => (g.suppressed || g.empty ? "–" : (measure === "mean" ? fmt(g.mean, 2) : fmt(g.positive ?? g.pct?.[this.cfg.cat ?? 0], 1))))] }));
-      rows.push({ cells: ["응답 수", ...groups.map(g => fmtInt(g.n))], total: true });
-      return { columns, rows };
-    }
-    return tableOf(res.agg, this.cfg, dimLabels);
+    return res ? tableOfPanel(this.cfg, this.cb, res) : null;
   }
 
   renderTable() {
@@ -267,19 +302,27 @@ export class Panel {
     setTimeout(() => document.addEventListener("click", close, { once: true }), 0);
   }
 
-  reportItem() {
-    return { id: panelId(this.cfg), cfg: { ...this.cfg }, title: this.titleText(), sub: this.el.querySelector(".sub").textContent, src: this.el.querySelector(".src").textContent };
+  /** 보고서에 담을 구성: 지금 화면에 적용된 필터까지 고정한다(보고서의 그림·사례 수가 담을 때와 같도록) */
+  reportCfg() {
+    const { _i, span, ...cfg } = this.cfg;
+    const filters = effectiveFilters(this.cfg, this.ctx.filtersOf?.(this.cfg.pop) || {});
+    return { ...cfg, by: [...(cfg.by || [])], filters };
   }
   toggleReport() {
-    const item = this.reportItem();
-    if (reportState.has(item.id)) { reportState.remove(item.id); toast("보고서에서 뺐습니다"); }
-    else { reportState.add(item); toast("보고서에 담았습니다 · 상단 '보고서' 탭에서 확인"); }
+    const cfg = this.reportCfg();
+    const id = panelId(cfg);
+    if (reportState.has(id)) { reportState.remove(id); toast("보고서에서 뺐습니다"); }
+    else {
+      reportState.add({ id, cfg });
+      toast(storageWorks() ? "보고서에 담았습니다 · 상단 '보고서' 탭에서 확인"
+        : "담았습니다. 다만 이 브라우저는 저장이 막혀 있어 창을 닫으면 담은 목록이 사라집니다", storageWorks() ? 2200 : 5000);
+    }
     this.syncReportBtn();
   }
   syncReportBtn() {
     const b = this.el.querySelector(".b-rep");
     if (!b) return;
-    const on = reportState.has(panelId(this.cfg));
+    const on = reportState.has(panelId(this.reportCfg()));
     b.classList.toggle("on", on);
     b.innerHTML = on ? ICONS.check : ICONS.plus;
     b.title = on ? "보고서에 담김 (클릭하면 뺌)" : "보고서에 담기";

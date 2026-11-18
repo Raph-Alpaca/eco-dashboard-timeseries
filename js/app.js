@@ -186,23 +186,34 @@ function parseHash() {
   return { tab: TABS.some(t => t.id === tab) ? tab : "overview", params: rest };
 }
 
+let routeGen = 0;
+
 async function route() {
   const { tab, params } = parseHash();
+  const gen = ++routeGen;
   document.querySelectorAll(".tabs a").forEach(a => a.classList.toggle("active", a.dataset.tab === tab));
   const main = document.getElementById("main");
   const sub = document.getElementById("subbar");
   if (app.current?.mod?.destroy) { try { app.current.mod.destroy(); } catch { /* ignore */ } }
   app.clearPanels();
-  main.innerHTML = `<p class="loading">불러오는 중…</p>`;
-  sub.innerHTML = "";
+  // 탭마다 새 그릇에 그린다. 데이터를 받는 사이 다른 탭으로 옮기면, 늦게 끝난 이전 탭은
+  // 이미 떼어 낸 그릇에 그리게 되어 지금 화면을 덮어쓰지 않는다.
+  const view = document.createElement("div");
+  view.className = "view";
+  view.innerHTML = `<p class="loading">불러오는 중…</p>`;
+  main.replaceChildren(view);
+  const subView = document.createElement("div");
+  sub.replaceChildren(subView);
+  document.body.dataset.tab = tab;   // 인쇄용 CSS가 탭을 구분하는 데 쓴다
   const def = TABS.find(t => t.id === tab);
   app.current = { tab, params, mod: def.mod };
+  const alive = () => gen === routeGen;
   try {
-    await def.mod.render({ main, sub, app, params, tab });
-    document.title = `${def.label} · 환경교육 조사 결과 대시보드`;
+    await def.mod.render({ main: view, sub: subView, app, params, tab, alive });
+    if (alive()) document.title = `${def.label} · 환경교육 조사 결과 대시보드`;
   } catch (err) {
     console.error(err);
-    main.innerHTML = `<div class="error"><b>화면을 그리지 못했습니다.</b><br>${escapeHtml(err.message || String(err))}<br><span style="font-size:.8rem">index.html 을 더블클릭해 연 경우 동작하지 않습니다. 서버실행.bat 으로 실행하거나 배포 주소로 접속해 주세요.</span></div>`;
+    if (alive()) view.innerHTML = `<div class="error"><b>화면을 그리지 못했습니다.</b><br>${escapeHtml(err.message || String(err))}<br><span style="font-size:.8rem">index.html 을 더블클릭해 연 경우 동작하지 않습니다. 서버실행.bat 으로 실행하거나 배포 주소로 접속해 주세요.</span></div>`;
   }
   setTimeout(resizeAll, 50);
 }

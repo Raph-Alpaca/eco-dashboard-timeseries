@@ -385,6 +385,19 @@ export async function exportPNG(option, { title, subtitle, filename, width = 110
   ch.dispose(); host.remove();
   const a = document.createElement("a"); a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove();
 }
+/** 옵션을 화면 밖에서 고정 크기로 그려 PNG data URL 로 돌려준다(인쇄용: 화면 폭과 무관하게 같은 그림) */
+export function renderToImage(option, { width = 720, height = 300 } = {}) {
+  const host = document.createElement("div");
+  host.style.cssText = `position:fixed;left:-99999px;top:0;width:${width}px;height:${height}px;background:#fff`;
+  document.body.appendChild(host);
+  const ch = echarts.init(host, null, { renderer: "canvas", devicePixelRatio: 2 });
+  try {
+    const opt = cloneOption(option);
+    opt.animation = false;
+    ch.setOption(opt, true);
+    return ch.getDataURL({ type: "png", pixelRatio: 2, backgroundColor: "#fff" });
+  } finally { ch.dispose(); host.remove(); }
+}
 /** 함수(포맷터)를 보존하는 복제 */
 export function cloneOption(src) {
   if (Array.isArray(src)) return src.map(cloneOption);
