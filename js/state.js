@@ -2,7 +2,9 @@
  * state.js — 화면 상태 저장(localStorage). 필터·패널 구성·보고서 담기.
  * 실패해도(사생활 보호 모드 등) 동작은 계속되도록 모든 접근을 try/catch 로 감싼다.
  */
-const PREFIX = "eco-dashboard:v1:";
+// 기존 사이트(/eco-dashboard/)와 같은 출처(raph-alpaca.github.io)를 쓰므로 저장 키를 분리한다.
+// 접두어가 같으면 두 사이트가 서로의 패널 구성·보고서 담기 목록을 덮어쓴다.
+const PREFIX = "eco-dashboard:v2:";
 
 function read(key, def) {
   try { const s = localStorage.getItem(PREFIX + key); return s ? JSON.parse(s) : def; } catch { return def; }

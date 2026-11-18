@@ -1,7 +1,7 @@
 # 대시보드 사용 안내
 
 ## 열기
-- 배포 주소: `https://raph-alpaca.github.io/eco-dashboard/` (GitHub Pages)
+- 배포 주소: `https://raph-alpaca.github.io/eco-dashboard-timeseries/` (GitHub Pages) · 이전 판: `https://raph-alpaca.github.io/eco-dashboard/`
 - 내 PC에서: 폴더의 `서버실행.bat`(또는 `run_server.bat`)을 더블클릭 → 브라우저가 열립니다. `index.html`을 직접 더블클릭하면 동작하지 않습니다(브라우저 보안 규칙).
 
 ## 화면 구성
