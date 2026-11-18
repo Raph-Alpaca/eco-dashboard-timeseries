@@ -1,6 +1,7 @@
 /** 데이터 안내 탭 — 합성 데이터 고지, 공표 일치 축/임의 축, 오류 보정 메모, 큐브 규격, 실데이터 교체 절차 */
 import { esc } from "../panel.js";
-import { loadManifest } from "../data.js";
+import { loadManifest, loadPublishedIndex } from "../data.js";
+import { downloadCSV } from "../charts.js";
 
 export async function render({ main, sub, app }) {
   await Promise.all([app.ensureSurvey("school_survey"), app.ensureSurvey("status_survey")]);
@@ -14,6 +15,12 @@ export async function render({ main, sub, app }) {
     <div class="page-head"><h2>데이터 안내</h2></div>
     <div class="prose">
       <p class="notice">이 대시보드의 모든 수치는 <b>보고서에 공표된 값에 맞춰 만든 합성(synthetic) 데이터</b>입니다. 실제 응답 자료가 아니며, 보고서에 없는 교차(예: 학년 × 시도)는 상위 집단과 같은 분포로 채운 값이므로 차이를 해석하면 안 됩니다. 실제 데이터로 바꾸면 같은 화면이 그대로 동작합니다.</p>
+      <h3>0. 실태조사 2024→2025 문항 대응표</h3>
+      <p>실태조사의 '추이' 화면은 <b>두 해의 문항이 같은 것만</b> 잇습니다. 근거는 2025년 보고서 부록1 '조사표 변경내역', 두 해의 설문지 원문, 2024년 표의 Base 문구·응답기관 수입니다.
+        2024년 값은 합성 데이터가 아니라 <b>보고서에 인쇄된 표를 그대로 옮긴 값</b>이며, 추이 화면의 2025년 값도 공표값입니다.</p>
+      <div class="linksum"></div>
+      <p><button class="btn small b-linkcsv">문항 대응표 전체 CSV</button> <label style="font-size:.84rem">기관 <select class="linkpop"></select></label></p>
+      <div class="table-wrap linktbl" style="max-height:420px"></div>
       <h3>1. 출처</h3>
       <ul><li>${esc(sc.sourceDoc)} — ${esc(sc.publisher)}</li><li>${esc(st.sourceDoc)} — ${esc(st.publisher)}</li></ul>
       <h3>2. 어떤 축이 보고서와 같고, 어떤 축이 임의인가</h3>
@@ -47,4 +54,28 @@ export async function render({ main, sub, app }) {
       <h3>7. 큐브 현황</h3>
       ${manifest ? `<table class="data"><thead><tr><th>모집단</th><th>단위 수</th><th>큐브 키</th><th>파일</th></tr></thead><tbody>${manifest.cubes.map(c => `<tr><td>${esc(c.pop)}</td><td>${c.nUnits.toLocaleString()}</td><td>${c.keys}</td><td>${esc(c.file)}</td></tr>`).join("")}</tbody></table><p style="font-size:.8rem;color:var(--ink-3)">생성: ${esc(manifest.generated)} · 소스: ${esc(manifest.source)}</p>` : "<p>manifest.json 을 찾지 못했습니다.</p>"}
     </div>`;
+  // 0. 문항 대응표
+  try {
+    const idx = await loadPublishedIndex();
+    const SL = idx.statusLabels, order = Object.keys(SL);
+    const pops = Object.entries(idx.pops);
+    main.querySelector(".linksum").innerHTML = `<div class="table-wrap"><table class="data"><thead><tr><th>기관</th>${order.map(s => `<th>${esc(SL[s])}</th>`).join("")}</tr></thead><tbody>
+      ${pops.map(([pid, p]) => `<tr><td>${esc(p.label)}</td>${order.map(s => `<td>${idx.summary[pid][s] || ""}</td>`).join("")}</tr>`).join("")}
+      <tr class="total"><td>합계</td>${order.map(s => `<td>${pops.reduce((a, [pid]) => a + (idx.summary[pid][s] || 0), 0)}</td>`).join("")}</tr></tbody></table></div>`;
+    const sel = main.querySelector(".linkpop");
+    sel.innerHTML = pops.map(([pid, p]) => `<option value="${pid}">${esc(p.label)}</option>`).join("");
+    const wtxt = it => (it.wording ? `2024: ${it.wording["2024"]} / 2025: ${it.wording["2025"]} — ${it.wording.diff || ""}` : "");
+    const draw = () => {
+      const p = idx.pops[sel.value];
+      main.querySelector(".linktbl").innerHTML = `<table class="data"><thead><tr><th>영역</th><th>문항</th><th>구분</th><th>이유·달라진 점</th><th>잇는 집단</th></tr></thead><tbody>
+        ${Object.entries(p.items).map(([qid, it]) => `<tr><td>${esc(it.section)}</td><td>${esc(it.short)}<br><code>${esc(qid)}</code></td><td>${esc(SL[it.status])}</td><td>${esc(it.reason || it.note || wtxt(it))}</td>
+          <td>${idx.linked.includes(it.status) ? esc([it.all ? "전체" : null, ...(it.axes || []).map(a => idx.dims[a]?.label || a)].filter(Boolean).join(", ")) : "–"}</td></tr>`).join("")}</tbody></table>`;
+    };
+    sel.onchange = draw; draw();
+    main.querySelector(".b-linkcsv").onclick = () => {
+      const rows = [];
+      for (const [pid, p] of pops) for (const [qid, it] of Object.entries(p.items)) rows.push([p.label, it.section, qid, it.short, SL[it.status], it.reason || it.note || "", it.wording?.["2024"] || "", it.wording?.["2025"] || "", it.wording?.diff || "", it.years.join("·")]);
+      downloadCSV("실태조사_2024-2025_문항대응표.csv", ["기관", "영역", "문항 ID", "문항", "구분", "이유", "2024 문구", "2025 문구", "달라진 점", "조사 연도"], rows);
+    };
+  } catch (err) { console.error(err); main.querySelector(".linksum").innerHTML = `<p class="loading">문항 대응표를 불러오지 못했습니다.</p>`; }
 }

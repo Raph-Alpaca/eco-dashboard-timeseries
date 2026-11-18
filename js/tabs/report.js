@@ -7,6 +7,7 @@
  */
 import { reportState, onReportChange, panelId, toast, storageWorks } from "../state.js";
 import { chartOn, disposeChart, renderToImage, downloadCSV } from "../charts.js";
+import { ensurePublished } from "./survey2.js";
 import { esc, ICONS, computePanel, captionOf, optionOfPanel, chartHeightOf, tableOfPanel } from "../panel.js";
 
 const PRINT_W = 720;          // 인쇄용 그림 폭(px) — A4 본문 폭(182mm)에 맞춰 축소된다
@@ -14,7 +15,7 @@ const MAX_ROWS = 40;          // 시트에 넣는 표의 최대 행 수(전체�
 const SAMPLE = [
   { survey: "school_survey", pop: "student", key: "S01", by: ["level"], chart: "auto" },
   { survey: "status_survey", pop: "inst_school", key: "SCH_PLAN_YN", by: ["level"], measure: "positive", chart: "auto" },
-  { survey: "status_survey", pop: "inst_local", key: "LOC_ORD_YN", by: ["metro"], chart: "auto" },
+  { mode: "pub", year: "2024-2025", survey: "status_survey", pop: "inst_local", key: "LOC_ORD_YN", years: [2024, 2025], group: "", by: [] },
 ];
 
 let unsub = null;
@@ -23,6 +24,7 @@ let liveCharts = [];
 /** 항목 하나를 그릴 재료로 바꾼다. 다른 화면(추이 등)의 항목은 app.reportRenderers[cfg.mode] 가 처리한다. */
 async function resolveItem(app, it) {
   const cfg = it.cfg;
+  if (cfg.mode === "pub" && !app.reportRenderers?.pub) await ensurePublished(app);   // 실태조사 탭을 거치지 않고 열린 경우
   const custom = cfg.mode && app.reportRenderers?.[cfg.mode];
   if (custom) return custom(app, cfg);
   await app.ensureCubes(cfg.survey, [cfg.pop]);
@@ -118,7 +120,7 @@ export async function render({ main, sub, app, params, alive = () => true }) {
         <ol><li>위 메뉴의 <b>학교환경교육 현황조사</b>나 <b>환경교육 실태조사</b>로 갑니다.</li>
         <li>넣고 싶은 그래프(패널) 오른쪽 위의 <b>＋</b> 버튼을 누릅니다. 필터를 건 상태로 담으면 그 조건 그대로 담깁니다.</li>
         <li>이 화면으로 돌아와 순서·메모를 정리하고 <b>PDF로 저장</b>을 누릅니다.</li></ol>
-        <button class="btn b-sample">예시 항목 3개 담아 보기</button></div>`;
+        <button class="btn b-sample">예시 항목 3개 담아 보기(추이 1개 포함)</button></div>`;
       sheet.querySelector(".b-sample").onclick = addSample;
       return;
     }
@@ -141,7 +143,7 @@ export async function render({ main, sub, app, params, alive = () => true }) {
           <textarea class="memo-in screen-only" placeholder="이 그림에 대한 메모(보고서에 함께 인쇄됩니다)" rows="2">${esc(o.it.memo || "")}</textarea>
           <div class="memo print-only"${o.it.memo ? "" : " hidden"}>${esc(o.it.memo || "")}</div>
           <div class="cap src">${esc(o.r.src)}</div></div>`).join("")}
-      <div class="foot">${esc(app.config.dataLabel || "")}${app.config.synthetic ? " · 본 자료의 수치는 보고서 공표값에 맞춘 합성 데이터이며 실제 응답 자료가 아닙니다." : ""} 생성: 환경교육 조사 결과 대시보드</div>`;
+      <div class="foot">${esc(app.config.dataLabel || "")}${app.config.synthetic ? " · '보고서 공표값'으로 표시한 항목은 보고서에 인쇄된 값이고, 그 밖의 항목은 공표값에 맞춘 합성 데이터로 실제 응답 자료가 아닙니다." : ""} 생성: 환경교육 조사 결과 대시보드</div>`;
     for (const o of out) {
       if (o.err) continue;
       const fig = sheet.querySelector(`.fig[data-id="${CSS.escape(o.it.id)}"]`);

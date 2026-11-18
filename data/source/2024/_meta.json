@@ -1,0 +1,152 @@
+{
+ "schemaVersion": 1,
+ "survey": "status_survey",
+ "year": 2024,
+ "refDate": "2023-12-31",
+ "title": "2024년 환경교육 실태조사",
+ "sourceDoc": "2024년 환경교육 실태조사 (환경부·한국환경보전원, 2024.12, 국가승인통계 제106037호)",
+ "publisher": "환경부 · 한국환경보전원 (국가승인통계 제106037호)",
+ "fieldwork": "1차 2024.9.26 ~ 10.16, 2차 2024.10.22 ~ 12.13 (온라인 조사, 기준일 2023.12.31)",
+ "weighting": "유아·초중등교육기관은 층화계통추출 표본이며 가중치를 적용하지 않음(보고서 본문 20쪽, PDF p.46: '별도의 가중을 부여하지 않음'). 표의 사례 수는 응답 기관 수.",
+ "source": [
+  {
+   "ref": "표1-1",
+   "pdf": 30,
+   "what": "조사 개요·조사 기간·작성 기준일"
+  },
+  {
+   "ref": "표1-14",
+   "pdf": 61,
+   "what": "조사 참여 현황"
+  },
+  {
+   "ref": "본문 20쪽",
+   "pdf": 46,
+   "what": "가중치 미적용"
+  }
+ ],
+ "notes": "participation 은 표1-14 인쇄값. 유아·초중등·고등의 합계 행(population/target/responded)은 표의 세부 행을 더한 계산값이며 rate 는 responded/target×100 으로 계산(표에는 세부 행만 인쇄).",
+ "participation": {
+  "inst_central": {
+   "population": 6,
+   "target": 6,
+   "responded": 6,
+   "rate": 100.0
+  },
+  "inst_metro": {
+   "population": 17,
+   "target": 17,
+   "responded": 17,
+   "rate": 100.0
+  },
+  "inst_local": {
+   "population": 226,
+   "target": 226,
+   "responded": 213,
+   "rate": 94.2
+  },
+  "inst_public": {
+   "population": 324,
+   "target": 324,
+   "responded": 260,
+   "rate": 80.2
+  },
+  "inst_social": {
+   "population": 89,
+   "target": 89,
+   "responded": 81,
+   "rate": 91.0
+  },
+  "inst_edu_office": {
+   "population": 17,
+   "target": 17,
+   "responded": 17,
+   "rate": 100.0
+  },
+  "inst_early": {
+   "population": 34576,
+   "target": 888,
+   "responded": 888,
+   "rate": 100.0,
+   "derived": true,
+   "detail": [
+    {
+     "label": "어린이집",
+     "population": 26611,
+     "target": 539,
+     "responded": 539,
+     "rate": 100.0
+    },
+    {
+     "label": "유치원",
+     "population": 7965,
+     "target": 349,
+     "responded": 349,
+     "rate": 100.0
+    }
+   ]
+  },
+  "inst_school": {
+   "population": 12029,
+   "target": 2776,
+   "responded": 2776,
+   "rate": 100.0,
+   "derived": true,
+   "detail": [
+    {
+     "label": "초등학교",
+     "population": 6311,
+     "target": 1009,
+     "responded": 1009,
+     "rate": 100.0
+    },
+    {
+     "label": "중학교",
+     "population": 3300,
+     "target": 911,
+     "responded": 911,
+     "rate": 100.0
+    },
+    {
+     "label": "고등학교",
+     "population": 2418,
+     "target": 856,
+     "responded": 856,
+     "rate": 100.0
+    }
+   ]
+  },
+  "inst_univ": {
+   "population": 56,
+   "target": 56,
+   "responded": 41,
+   "rate": 73.2,
+   "derived": true,
+   "detail": [
+    {
+     "label": "사범대",
+     "population": 46,
+     "target": 46,
+     "responded": 31,
+     "rate": 67.4
+    },
+    {
+     "label": "교육대",
+     "population": 10,
+     "target": 10,
+     "responded": 10,
+     "rate": 100.0
+    }
+   ]
+  }
+ },
+ "dimLabels": {
+  "ministry": {
+   "env": "환경부 산하",
+   "other": "환경부 외"
+  },
+  "unit": {
+   "env": "환경부"
+  }
+ }
+}

@@ -5,8 +5,8 @@ window.ECO_CONFIG = {
   dataSource: 'static',
   dataBase: 'data/',
   apiBase: '',
-  buildId: '2026-10-29.1',          // 캐시 무효화용. 큐브를 다시 만들면 올립니다.
-  dataLabel: '합성 데이터 · 2025년 보고서 공표값 기반',
+  buildId: '2026-11-18.1',          // 캐시 무효화용. 큐브를 다시 만들면 올립니다.
+  dataLabel: '합성 데이터(2025) · 보고서 공표값(2024·2025)',
   synthetic: true,                   // true면 모든 패널에 "합성 데이터" 배지 표시
   suppression: {
     person: { minN: 30 },            // 사람 단위 조사: 비가중 n < 30 → 값 숨김

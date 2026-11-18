@@ -226,7 +226,7 @@
    "type": "numeric",
    "baseKind": "기관",
    "source": [{"ref": "표2-23", "pdf": 74}],
-   "notes": "표2-23 '전담 인원 계'. 0은 인쇄값.",
+   "notes": "표2-23 '전담 인원 계'. 0은 인쇄값. 전체 행 mean은 23 / 17로 계산(보고서는 합계만 공표).",
    "rows": [
     {"by": "all", "key": "all", "n": 17, "mean": 1.35, "total": 23},
     {"by": "sido", "key": "11", "n": 1, "mean": 3},
@@ -256,7 +256,7 @@
    "type": "numeric",
    "baseKind": "기관",
    "source": [{"ref": "표2-23", "pdf": 74}],
-   "notes": "표2-23 '겸임 인원 계'. 0은 인쇄값.",
+   "notes": "표2-23 '겸임 인원 계'. 0은 인쇄값. 전체 행 mean은 30 / 17로 계산(보고서는 합계만 공표).",
    "rows": [
     {"by": "all", "key": "all", "n": 17, "mean": 1.76, "total": 30},
     {"by": "sido", "key": "11", "n": 1, "mean": 1},

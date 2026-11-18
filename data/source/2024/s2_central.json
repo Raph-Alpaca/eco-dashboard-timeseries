@@ -1,0 +1,728 @@
+{
+ "schemaVersion": 1,
+ "survey": "status_survey",
+ "pop": "inst_central",
+ "year": 2024,
+ "refDate": "2023-12-31",
+ "sourceDoc": "2024년 환경교육 실태조사 보고서",
+ "tables": [
+  {
+   "qid": "CEN_LAW_YN",
+   "label": "환경교육 관련 법령 제정 여부",
+   "short": "법령 제정 여부",
+   "section": "법령/계획",
+   "indicator": "law",
+   "type": "binary",
+   "categories": ["없음", "있음"],
+   "baseKind": "기관",
+   "source": [{"ref": "표2-1", "pdf": 65}, {"ref": "그림2-1", "pdf": 65}],
+   "notes": "그림2-1 Base 문구: '[Base: 중앙행정기관 본청 응답자 (n=6), 단위: %]'. 표2-1에는 응답기관 수 주석이 없음. 표는 응답기관 수와 %만 인쇄(있음 100, 없음 '-'); 여부 표의 '-'는 2025 전사본 관례대로 0.0으로 적음. 전체 행 counts는 인쇄값이 아니라 응답기관 수×%로 계산(6×100%=6). 인쇄 기관명은 '환경부'(key env). 행은 본청 4(환경부·교육부·농림축산식품부·해양수산부)·외청 2(기상청·산림청).",
+   "rows": [
+    {"by": "all", "key": "all", "n": 6, "pct": [0.0, 100.0], "positive": 100.0, "counts": [0, 6]},
+    {"by": "unit", "key": "env", "n": 1, "pct": [0.0, 100.0], "positive": 100.0},
+    {"by": "unit", "key": "edu", "n": 1, "pct": [0.0, 100.0], "positive": 100.0},
+    {"by": "unit", "key": "agri", "n": 1, "pct": [0.0, 100.0], "positive": 100.0},
+    {"by": "unit", "key": "ocean", "n": 1, "pct": [0.0, 100.0], "positive": 100.0},
+    {"by": "unit", "key": "kma", "n": 1, "pct": [0.0, 100.0], "positive": 100.0},
+    {"by": "unit", "key": "forest", "n": 1, "pct": [0.0, 100.0], "positive": 100.0}
+   ]
+  },
+  {
+   "qid": "CEN_LAW_N",
+   "label": "환경교육 법령 개수",
+   "short": "법령 개수",
+   "section": "법령/계획",
+   "type": "numeric",
+   "baseKind": "기관",
+   "source": [{"ref": "표2-2", "pdf": 66}, {"ref": "표2-2", "pdf": 67}],
+   "notes": "표2-2 주석: '* 응답기관 수 : 설문조사에 응답한 본청과 외청 기관 수'. 본문: '총 6개의 기관에서 29개의 법령을 제정'. 전체 행 mean은 합계 29 / 응답기관 6으로 계산(보고서는 합계만 공표). 법령명·제정연도·개정연도 목록은 전사하지 않음.",
+   "rows": [
+    {"by": "all", "key": "all", "n": 6, "mean": 4.83, "total": 29},
+    {"by": "unit", "key": "env", "n": 1, "mean": 24},
+    {"by": "unit", "key": "edu", "n": 1, "mean": 1},
+    {"by": "unit", "key": "agri", "n": 1, "mean": 1},
+    {"by": "unit", "key": "ocean", "n": 1, "mean": 1},
+    {"by": "unit", "key": "kma", "n": 1, "mean": 1},
+    {"by": "unit", "key": "forest", "n": 1, "mean": 1}
+   ]
+  },
+  {
+   "qid": "CEN_PLAN_YN",
+   "label": "환경교육 관련 계획 수립 여부",
+   "short": "계획 수립 여부",
+   "section": "법령/계획",
+   "indicator": "plan",
+   "type": "binary",
+   "categories": ["없음", "있음"],
+   "baseKind": "기관",
+   "source": [{"ref": "표2-3", "pdf": 68}, {"ref": "그림2-2", "pdf": 68}],
+   "notes": "그림2-2 Base 문구: '[Base: 중앙행정기관 본청 응답자 (n=6), 단위: %]'. 표2-3 주석: '* 응답기관 수 : 설문조사에 응답한 본청과 외청 기관 수'. 보기는 2024 인쇄 그대로 '있음/없음'(2025 전사본은 '수립함/수립하지 않음'). 표는 %만 인쇄; 전체 행 counts는 응답기관 수×%로 계산(6×83.3%=5, 6×16.7%=1). 여부 표의 '-'는 0.0.",
+   "rows": [
+    {"by": "all", "key": "all", "n": 6, "pct": [16.7, 83.3], "positive": 83.3, "counts": [1, 5]},
+    {"by": "unit", "key": "env", "n": 1, "pct": [0.0, 100.0], "positive": 100.0},
+    {"by": "unit", "key": "edu", "n": 1, "pct": [100.0, 0.0], "positive": 0.0},
+    {"by": "unit", "key": "agri", "n": 1, "pct": [0.0, 100.0], "positive": 100.0},
+    {"by": "unit", "key": "ocean", "n": 1, "pct": [0.0, 100.0], "positive": 100.0},
+    {"by": "unit", "key": "kma", "n": 1, "pct": [0.0, 100.0], "positive": 100.0},
+    {"by": "unit", "key": "forest", "n": 1, "pct": [0.0, 100.0], "positive": 100.0}
+   ]
+  },
+  {
+   "qid": "CEN_PLAN_N",
+   "label": "환경교육 관련 계획 개수",
+   "short": "계획 개수",
+   "section": "법령/계획",
+   "type": "numeric",
+   "base": {"qid": "CEN_PLAN_YN", "eq": 1},
+   "baseKind": "기관",
+   "source": [{"ref": "표2-4", "pdf": 69}],
+   "notes": "표2-4 주석: '* 응답기관 수 : 환경교육 관련 계획을 수립하였다고 응답한 본청과 외청 기관 수'. 본문: '총 5개의 기관에서 15개의 환경교육 관련 계획을 수립함'. 전체 행 mean은 합계 15 / 계획 수립 기관 5로 계산(보고서는 합계만 공표). 교육부는 응답기관 수·계획 개수 모두 '-'로 기준 밖(n 0, mean null). 계획명·수립연도·계획기간·근거 법령 목록은 전사하지 않음.",
+   "rows": [
+    {"by": "all", "key": "all", "n": 5, "mean": 3.0, "total": 15},
+    {"by": "unit", "key": "env", "n": 1, "mean": 11},
+    {"by": "unit", "key": "edu", "n": 0, "mean": null},
+    {"by": "unit", "key": "agri", "n": 1, "mean": 1},
+    {"by": "unit", "key": "ocean", "n": 1, "mean": 1},
+    {"by": "unit", "key": "kma", "n": 1, "mean": 1},
+    {"by": "unit", "key": "forest", "n": 1, "mean": 1}
+   ]
+  },
+  {
+   "qid": "CEN_DEPT_YN",
+   "label": "환경교육 업무 담당 부서 및 인력 여부",
+   "short": "담당 부서·인력 여부",
+   "section": "조직/인력",
+   "indicator": "staff",
+   "type": "binary",
+   "categories": ["없음", "있음"],
+   "baseKind": "기관",
+   "source": [{"ref": "표2-5", "pdf": 70}, {"ref": "그림2-3", "pdf": 70}],
+   "notes": "그림2-3 Base 문구: '[Base: 중앙행정기관 응답자 (n=12), 단위: %]'. 표2-5 주석: '* 응답기관 수 : 설문조사에 응답한 본청과 외청, 소속기관 수'. 분모가 본청·외청 6곳이 아니라 소속기관 응답을 포함한 12곳임(2025 전사본은 n=6). 인쇄된 응답기관 수 구성(계=본청/외청/소속기관): 전체 12=4/2/6, 환경부 1=1/-/-, 교육부 2=1/-/1, 농림축산식품부 1=1/-/-, 해양수산부 1=1/-/-, 기상청 1=-/1/-, 산림청 6=-/1/5. 즉 교육부·산림청 행의 n과 %는 소속기관 응답이 섞인 값. 표는 %만 인쇄; 전체 행 counts는 응답기관 수×%로 계산(12×58.3%=7, 12×41.7%=5)했고, 있음 7은 표2-6 응답기관 수 계 7(환경부 1, 교육부 1, 해양수산부 1, 기상청 1, 산림청 3)과 일치. 여부 표의 '-'는 0.0.",
+   "rows": [
+    {"by": "all", "key": "all", "n": 12, "pct": [41.7, 58.3], "positive": 58.3, "counts": [5, 7]},
+    {"by": "unit", "key": "env", "n": 1, "pct": [0.0, 100.0], "positive": 100.0},
+    {"by": "unit", "key": "edu", "n": 2, "pct": [50.0, 50.0], "positive": 50.0},
+    {"by": "unit", "key": "agri", "n": 1, "pct": [100.0, 0.0], "positive": 0.0},
+    {"by": "unit", "key": "ocean", "n": 1, "pct": [0.0, 100.0], "positive": 100.0},
+    {"by": "unit", "key": "kma", "n": 1, "pct": [0.0, 100.0], "positive": 100.0},
+    {"by": "unit", "key": "forest", "n": 6, "pct": [50.0, 50.0], "positive": 50.0}
+   ]
+  },
+  {
+   "qid": "CEN_DEPT_N",
+   "label": "환경교육 담당 운영 부서 수",
+   "short": "담당 부서 수",
+   "section": "조직/인력",
+   "type": "numeric",
+   "base": {"qid": "CEN_DEPT_YN", "eq": 1},
+   "baseKind": "기관",
+   "source": [{"ref": "표2-6", "pdf": 71}, {"ref": "표2-7", "pdf": 71}],
+   "notes": "표2-6 '부서 수' 열을 전사. 표2-6 주석: '* 응답기관 수 : 환경교육 담당 부서 및 인력이 있다고 응답한 본청, 외청, 소속기관 수'. 인쇄된 응답기관 수 구성(계=본청/외청/소속기관): 전체 7=3/2/2, 환경부 1=1/-/-, 교육부 1=1/-/-, 농림축산식품부 '-', 해양수산부 1=1/-/-, 기상청 1=-/1/-, 산림청 3=-/1/2. total은 인쇄값, mean은 total/n으로 계산(전체 19/7=2.71, 산림청 11/3=3.67; n=1인 행은 인쇄값 그대로). 농림축산식품부는 전부 '-'로 기준 밖(n 0). [보고서 내부 불일치] 같은 쪽 표2-7(부서명 목록)은 응답기관 수 5·부서 개수 12(환경부 1기관 5개, 교육부 1기관 1개, 농림축산식품부 '-', 해양수산부 1기관 1개, 기상청 1기관 1개, 산림청 1기관 4개)로 인쇄되어 표2-6(7기관 19개, 산림청 3기관 11개)과 다름. 표2-7의 주석 문구는 표2-6과 같음. 여기서는 인력 수와 같은 기준인 표2-6을 따름. 부서명 목록은 전사하지 않음.",
+   "rows": [
+    {"by": "all", "key": "all", "n": 7, "mean": 2.71, "total": 19},
+    {"by": "unit", "key": "env", "n": 1, "mean": 5, "total": 5},
+    {"by": "unit", "key": "edu", "n": 1, "mean": 1, "total": 1},
+    {"by": "unit", "key": "agri", "n": 0, "mean": null},
+    {"by": "unit", "key": "ocean", "n": 1, "mean": 1, "total": 1},
+    {"by": "unit", "key": "kma", "n": 1, "mean": 1, "total": 1},
+    {"by": "unit", "key": "forest", "n": 3, "mean": 3.67, "total": 11}
+   ]
+  },
+  {
+   "qid": "CEN_STAFF_N",
+   "label": "환경교육 담당 인력 총인원(명)",
+   "short": "담당 인력 총인원",
+   "section": "조직/인력",
+   "type": "numeric",
+   "base": {"qid": "CEN_DEPT_YN", "eq": 1},
+   "baseKind": "기관",
+   "source": [{"ref": "표2-6", "pdf": 71}],
+   "notes": "표2-6 '총인원 계'. 표2-6 주석: '* 응답기관 수 : 환경교육 담당 부서 및 인력이 있다고 응답한 본청, 외청, 소속기관 수'(전체 7=본청 3/외청 2/소속기관 2; 산림청 3=외청 1/소속기관 2). total은 인쇄값, mean은 total/n으로 계산(전체 132/7=18.86, 산림청 13/3=4.33). 본문: '총 132명, 남성 44명, 여성 88명'. 인쇄된 총인원 남/여: 전체 44/88, 환경부 40/73, 교육부 -/2, 해양수산부 -/2, 기상청 1/1, 산림청 3/10. 농림축산식품부는 기준 밖(n 0).",
+   "rows": [
+    {"by": "all", "key": "all", "n": 7, "mean": 18.86, "total": 132},
+    {"by": "unit", "key": "env", "n": 1, "mean": 113, "total": 113},
+    {"by": "unit", "key": "edu", "n": 1, "mean": 2, "total": 2},
+    {"by": "unit", "key": "agri", "n": 0, "mean": null},
+    {"by": "unit", "key": "ocean", "n": 1, "mean": 2, "total": 2},
+    {"by": "unit", "key": "kma", "n": 1, "mean": 2, "total": 2},
+    {"by": "unit", "key": "forest", "n": 3, "mean": 4.33, "total": 13}
+   ]
+  },
+  {
+   "qid": "CEN_STAFF_FULL_N",
+   "label": "환경교육 담당 전담 인원(명)",
+   "short": "전담 인원",
+   "section": "조직/인력",
+   "type": "numeric",
+   "base": {"qid": "CEN_DEPT_YN", "eq": 1},
+   "baseKind": "기관",
+   "source": [{"ref": "표2-6", "pdf": 71}],
+   "notes": "표2-6 '전담 인원 계'. 응답기관 수는 표2-6 그대로(전체 7, 산림청 3; 소속기관 포함). total은 인쇄값, mean은 total/n으로 계산(전체 79/7=11.29, 산림청 9/3=3.0). 교육부·해양수산부는 기준 안(n 1)이지만 전담 인원이 '-'로 인쇄되어 null(2025 보고서는 0으로 인쇄). 농림축산식품부는 기준 밖(n 0).",
+   "rows": [
+    {"by": "all", "key": "all", "n": 7, "mean": 11.29, "total": 79},
+    {"by": "unit", "key": "env", "n": 1, "mean": 68, "total": 68},
+    {"by": "unit", "key": "edu", "n": 1, "mean": null, "total": null},
+    {"by": "unit", "key": "agri", "n": 0, "mean": null},
+    {"by": "unit", "key": "ocean", "n": 1, "mean": null, "total": null},
+    {"by": "unit", "key": "kma", "n": 1, "mean": 2, "total": 2},
+    {"by": "unit", "key": "forest", "n": 3, "mean": 3.0, "total": 9}
+   ]
+  },
+  {
+   "qid": "CEN_STAFF_PART_N",
+   "label": "환경교육 담당 겸임 인원(명)",
+   "short": "겸임 인원",
+   "section": "조직/인력",
+   "type": "numeric",
+   "base": {"qid": "CEN_DEPT_YN", "eq": 1},
+   "baseKind": "기관",
+   "source": [{"ref": "표2-6", "pdf": 71}],
+   "notes": "표2-6 '겸임 인원 계'. 응답기관 수는 표2-6 그대로(전체 7, 산림청 3; 소속기관 포함). total은 인쇄값, mean은 total/n으로 계산(전체 53/7=7.57, 산림청 4/3=1.33). 기상청은 기준 안(n 1)이지만 겸임 인원이 '-'로 인쇄되어 null(2025 보고서는 0으로 인쇄). 농림축산식품부는 기준 밖(n 0).",
+   "rows": [
+    {"by": "all", "key": "all", "n": 7, "mean": 7.57, "total": 53},
+    {"by": "unit", "key": "env", "n": 1, "mean": 45, "total": 45},
+    {"by": "unit", "key": "edu", "n": 1, "mean": 2, "total": 2},
+    {"by": "unit", "key": "agri", "n": 0, "mean": null},
+    {"by": "unit", "key": "ocean", "n": 1, "mean": 2, "total": 2},
+    {"by": "unit", "key": "kma", "n": 1, "mean": null, "total": null},
+    {"by": "unit", "key": "forest", "n": 3, "mean": 1.33, "total": 4}
+   ]
+  },
+  {
+   "qid": "CEN_STAFF_COMP",
+   "label": "환경교육 담당 인력 구성(전담·겸임 × 성별)",
+   "short": "인력 구성",
+   "section": "조직/인력",
+   "type": "events",
+   "categories": ["전담 남", "전담 여", "겸임 남", "겸임 여"],
+   "base": {"qid": "CEN_DEPT_YN", "eq": 1},
+   "baseKind": "기관",
+   "source": [{"ref": "표2-6", "pdf": 71}],
+   "notes": "counts=표2-6 인원(명) 인쇄값, events=총인원 계(인쇄값), mean=events/n(계산), pct=인원 기준 구성비(전사자 계산: counts/events, 소수 1자리). 응답기관 수는 표2-6 그대로(전체 7=본청 3/외청 2/소속기관 2, 산림청 3=외청 1/소속기관 2). '-'는 null. 농림축산식품부는 기준 밖(n 0).",
+   "rows": [
+    {"by": "all", "key": "all", "n": 7, "events": 132, "mean": 18.86, "pct": [20.5, 39.4, 12.9, 27.3], "counts": [27, 52, 17, 36]},
+    {"by": "unit", "key": "env", "n": 1, "events": 113, "mean": 113, "pct": [20.4, 39.8, 15.0, 24.8], "counts": [23, 45, 17, 28]},
+    {"by": "unit", "key": "edu", "n": 1, "events": 2, "mean": 2, "pct": [null, null, null, 100.0], "counts": [null, null, null, 2]},
+    {"by": "unit", "key": "agri", "n": 0, "events": null, "mean": null, "pct": null, "counts": null},
+    {"by": "unit", "key": "ocean", "n": 1, "events": 2, "mean": 2, "pct": [null, null, null, 100.0], "counts": [null, null, null, 2]},
+    {"by": "unit", "key": "kma", "n": 1, "events": 2, "mean": 2, "pct": [50.0, 50.0, null, null], "counts": [1, 1, null, null]},
+    {"by": "unit", "key": "forest", "n": 3, "events": 13, "mean": 4.33, "pct": [23.1, 46.2, null, 30.8], "counts": [3, 6, null, 4]}
+   ]
+  },
+  {
+   "qid": "CEN_HIRE_YN",
+   "label": "환경교육 별도 채용 인력 여부",
+   "short": "별도 채용 인력 여부",
+   "section": "조직/인력",
+   "type": "binary",
+   "categories": ["없음", "있음"],
+   "base": {"qid": "CEN_DEPT_YN", "eq": 1},
+   "baseKind": "기관",
+   "source": [{"ref": "표2-8", "pdf": 72}, {"ref": "그림2-4", "pdf": 72}],
+   "notes": "2025 전사본에 없는 2024 문항. 그림2-4 Base 문구: '[Base: 환경교육 업무 담당 부서 有 (n=7), 단위: %]'. 표2-8 주석: '* 응답기관 수 : 환경교육 담당 부서 및 인력이 있다고 응답한 본청, 외청, 소속기관 수'. 인쇄된 응답기관 수 구성(계=본청/외청/소속기관): 전체 7=3/2/2, 환경부 1=1/-/-, 교육부 1=1/-/-, 농림축산식품부 '-', 해양수산부 1=1/-/-, 기상청 1=-/1/-, 산림청 3=-/1/2. 표는 %만 인쇄; 전체 행 counts는 응답기관 수×%로 계산(7×28.6%=2, 7×71.4%=5). 농림축산식품부는 전부 '-'로 기준 밖(n 0, pct null). 여부 표의 '-'는 0.0.",
+   "rows": [
+    {"by": "all", "key": "all", "n": 7, "pct": [71.4, 28.6], "positive": 28.6, "counts": [5, 2]},
+    {"by": "unit", "key": "env", "n": 1, "pct": [0.0, 100.0], "positive": 100.0},
+    {"by": "unit", "key": "edu", "n": 1, "pct": [100.0, 0.0], "positive": 0.0},
+    {"by": "unit", "key": "agri", "n": 0, "pct": null, "positive": null},
+    {"by": "unit", "key": "ocean", "n": 1, "pct": [100.0, 0.0], "positive": 0.0},
+    {"by": "unit", "key": "kma", "n": 1, "pct": [100.0, 0.0], "positive": 0.0},
+    {"by": "unit", "key": "forest", "n": 3, "pct": [66.7, 33.3], "positive": 33.3}
+   ]
+  },
+  {
+   "qid": "CEN_HIRE_N",
+   "label": "환경교육 별도 채용 인력 수(명)",
+   "short": "별도 채용 인력 수",
+   "section": "조직/인력",
+   "type": "numeric",
+   "base": {"qid": "CEN_HIRE_YN", "eq": 1},
+   "baseKind": "기관",
+   "source": [{"ref": "표2-8", "pdf": 72}],
+   "notes": "2025 전사본에 없는 2024 문항. 표2-8 '채용한 인력 현황 계'(전체 4, 환경부 3, 산림청 1은 인쇄값). n(별도 채용 인력이 있는 기관 수)은 인쇄값이 아니라 표2-8 응답기관 수×있음%로 계산(전체 7×28.6%=2, 환경부 1×100%=1, 산림청 3×33.3%=1). 전체 행 mean은 4/2로 계산. 채용 인력이 없는 기관('-')은 기준 밖(n 0, mean null).",
+   "rows": [
+    {"by": "all", "key": "all", "n": 2, "mean": 2.0, "total": 4},
+    {"by": "unit", "key": "env", "n": 1, "mean": 3},
+    {"by": "unit", "key": "edu", "n": 0, "mean": null},
+    {"by": "unit", "key": "agri", "n": 0, "mean": null},
+    {"by": "unit", "key": "ocean", "n": 0, "mean": null},
+    {"by": "unit", "key": "kma", "n": 0, "mean": null},
+    {"by": "unit", "key": "forest", "n": 1, "mean": 1}
+   ]
+  },
+  {
+   "qid": "CEN_HIRE_COMP",
+   "label": "환경교육 별도 채용 인력 구성(성별)",
+   "short": "별도 채용 인력 구성",
+   "section": "조직/인력",
+   "type": "events",
+   "categories": ["남", "여"],
+   "base": {"qid": "CEN_HIRE_YN", "eq": 1},
+   "baseKind": "기관",
+   "source": [{"ref": "표2-8", "pdf": 72}],
+   "notes": "2025 전사본에 없는 2024 문항. counts=표2-8 '채용한 인력 현황' 남·여 인쇄값(명), events=계(인쇄값). n은 표2-8 응답기관 수×있음%로 계산(전체 2, 환경부 1, 산림청 1), mean=events/n(계산), pct=인원 기준 구성비(전사자 계산). '-'는 null.",
+   "rows": [
+    {"by": "all", "key": "all", "n": 2, "events": 4, "mean": 2.0, "pct": [25.0, 75.0], "counts": [1, 3]},
+    {"by": "unit", "key": "env", "n": 1, "events": 3, "mean": 3, "pct": [33.3, 66.7], "counts": [1, 2]},
+    {"by": "unit", "key": "edu", "n": 0, "events": null, "mean": null, "pct": null, "counts": null},
+    {"by": "unit", "key": "agri", "n": 0, "events": null, "mean": null, "pct": null, "counts": null},
+    {"by": "unit", "key": "ocean", "n": 0, "events": null, "mean": null, "pct": null, "counts": null},
+    {"by": "unit", "key": "kma", "n": 0, "events": null, "mean": null, "pct": null, "counts": null},
+    {"by": "unit", "key": "forest", "n": 1, "events": 1, "mean": 1, "pct": [null, 100.0], "counts": [null, 1]}
+   ]
+  },
+  {
+   "qid": "CEN_AFFIL_YN",
+   "label": "환경교육 수행 산하기관 여부",
+   "short": "산하기관 여부",
+   "section": "조직/인력",
+   "indicator": "affiliate",
+   "type": "binary",
+   "categories": ["없음", "있음"],
+   "baseKind": "기관",
+   "source": [{"ref": "표2-9", "pdf": 73}, {"ref": "그림2-5", "pdf": 73}],
+   "notes": "그림2-5 Base 문구: '[Base: 환경교육 업무 수행 기관 有 (n=6), 단위: %]'. 표2-9 주석: '* 응답기관 수 : 설문조사에 응답한 본청과 외청 기관 수'. 그림의 Base 문구는 '업무 수행 기관 有'이지만 표의 응답기관 수는 본청 4·외청 2 전체 6곳이고 본문도 '응답한 중앙행정기관 본청 중 … 33.3%'라고 적어, 조건 없는 6곳 기준으로 전사(base 생략). 표는 %만 인쇄; 전체 행 counts는 응답기관 수×%로 계산(6×33.3%=2, 6×66.7%=4). 여부 표의 '-'는 0.0.",
+   "rows": [
+    {"by": "all", "key": "all", "n": 6, "pct": [66.7, 33.3], "positive": 33.3, "counts": [4, 2]},
+    {"by": "unit", "key": "env", "n": 1, "pct": [0.0, 100.0], "positive": 100.0},
+    {"by": "unit", "key": "edu", "n": 1, "pct": [100.0, 0.0], "positive": 0.0},
+    {"by": "unit", "key": "agri", "n": 1, "pct": [100.0, 0.0], "positive": 0.0},
+    {"by": "unit", "key": "ocean", "n": 1, "pct": [0.0, 100.0], "positive": 100.0},
+    {"by": "unit", "key": "kma", "n": 1, "pct": [100.0, 0.0], "positive": 0.0},
+    {"by": "unit", "key": "forest", "n": 1, "pct": [100.0, 0.0], "positive": 0.0}
+   ]
+  },
+  {
+   "qid": "CEN_AFFIL_N",
+   "label": "환경교육 수행 산하기관 수",
+   "short": "산하기관 수",
+   "section": "조직/인력",
+   "type": "numeric",
+   "base": {"qid": "CEN_AFFIL_YN", "eq": 1},
+   "baseKind": "기관",
+   "source": [{"ref": "표2-9", "pdf": 73}, {"ref": "표2-10", "pdf": 74}],
+   "notes": "표2-9 '환경교육 수행 산하기관 현황 계'(전체 2, 환경부 1, 해양수산부 1은 인쇄값). n(보유 기관 수)은 응답기관 수×있음%로 계산(6×33.3%=2). 전체 행 mean은 2/2로 계산. 본문(표2-10): '산하기관을 보유한 곳은 환경부와 해양수산부 2개 기관'. 기관명 목록(표2-10; 주석 '* 기관 정보 : 환경교육 수행 산하기관이 있다고 응답한 본청과 외청에서 작성한 기관 정보')은 전사하지 않음.",
+   "rows": [
+    {"by": "all", "key": "all", "n": 2, "mean": 1.0, "total": 2},
+    {"by": "unit", "key": "env", "n": 1, "mean": 1},
+    {"by": "unit", "key": "edu", "n": 0, "mean": null},
+    {"by": "unit", "key": "agri", "n": 0, "mean": null},
+    {"by": "unit", "key": "ocean", "n": 1, "mean": 1},
+    {"by": "unit", "key": "kma", "n": 0, "mean": null},
+    {"by": "unit", "key": "forest", "n": 0, "mean": null}
+   ]
+  },
+  {
+   "qid": "CEN_AFFIL_TYPE",
+   "label": "환경교육 수행 산하기관 운영 방식",
+   "short": "산하기관 운영 방식",
+   "section": "조직/인력",
+   "type": "events",
+   "categories": ["외청·소속기관", "공공기관", "위탁 운영"],
+   "base": {"qid": "CEN_AFFIL_YN", "eq": 1},
+   "baseKind": "기관",
+   "source": [{"ref": "표2-9", "pdf": 73}, {"ref": "표2-10", "pdf": 74}],
+   "notes": "보기는 2024 인쇄 그대로 3개(외청·소속기관/공공기관/위탁 운영); 2025 전사본은 4개(외청/소속기관/유관기관/위탁운영). counts=표2-9 산하기관 수 인쇄값(개), events=계(인쇄값), n=보유 기관 수(응답기관 수×있음%로 계산), mean=events/n(계산), pct=산하기관 기준 구성비(전사자 계산). '-'는 null. 표2-10의 운영 방식 열도 같은 값(환경부 공공기관 1, 해양수산부 위탁 운영 1).",
+   "rows": [
+    {"by": "all", "key": "all", "n": 2, "events": 2, "mean": 1.0, "pct": [null, 50.0, 50.0], "counts": [null, 1, 1]},
+    {"by": "unit", "key": "env", "n": 1, "events": 1, "mean": 1, "pct": [null, 100.0, null], "counts": [null, 1, null]},
+    {"by": "unit", "key": "edu", "n": 0, "events": null, "mean": null, "pct": null, "counts": null},
+    {"by": "unit", "key": "agri", "n": 0, "events": null, "mean": null, "pct": null, "counts": null},
+    {"by": "unit", "key": "ocean", "n": 1, "events": 1, "mean": 1, "pct": [null, null, 100.0], "counts": [null, null, 1]},
+    {"by": "unit", "key": "kma", "n": 0, "events": null, "mean": null, "pct": null, "counts": null},
+    {"by": "unit", "key": "forest", "n": 0, "events": null, "mean": null, "pct": null, "counts": null}
+   ]
+  },
+  {
+   "qid": "CEN_PROGRAM_YN",
+   "label": "자체 환경교육 사업 여부",
+   "short": "자체 사업 여부",
+   "section": "사업/예산",
+   "indicator": "program",
+   "type": "binary",
+   "categories": ["없음", "있음"],
+   "baseKind": "기관",
+   "source": [{"ref": "표2-11", "pdf": 75}, {"ref": "그림2-6", "pdf": 75}],
+   "notes": "그림2-6 Base 문구: '[Base: 중앙행정기관 본청 응답자 (n=6), 단위: %]'. 표2-11 주석: '* 응답기관 수 : 설문조사에 응답한 본청과 외청 기관 수'. 표는 %만 인쇄; 전체 행 counts는 응답기관 수×%로 계산(6×66.7%=4, 6×33.3%=2). 여부 표의 '-'는 0.0.",
+   "rows": [
+    {"by": "all", "key": "all", "n": 6, "pct": [33.3, 66.7], "positive": 66.7, "counts": [2, 4]},
+    {"by": "unit", "key": "env", "n": 1, "pct": [0.0, 100.0], "positive": 100.0},
+    {"by": "unit", "key": "edu", "n": 1, "pct": [100.0, 0.0], "positive": 0.0},
+    {"by": "unit", "key": "agri", "n": 1, "pct": [0.0, 100.0], "positive": 100.0},
+    {"by": "unit", "key": "ocean", "n": 1, "pct": [0.0, 100.0], "positive": 100.0},
+    {"by": "unit", "key": "kma", "n": 1, "pct": [0.0, 100.0], "positive": 100.0},
+    {"by": "unit", "key": "forest", "n": 1, "pct": [100.0, 0.0], "positive": 0.0}
+   ]
+  },
+  {
+   "qid": "CEN_BUDGET",
+   "label": "자체 환경교육 사업 총 예산(백만 원)",
+   "short": "사업 총 예산",
+   "section": "사업/예산",
+   "type": "numeric",
+   "base": {"qid": "CEN_PROGRAM_YN", "eq": 1},
+   "baseKind": "기관",
+   "source": [{"ref": "표2-11", "pdf": 75}, {"ref": "표2-12", "pdf": 76}, {"ref": "표2-12", "pdf": 77}],
+   "notes": "단위 백만 원. 표2-11 '총예산' 열을 전사(전체 29,629; 기관별 합 21,200+5,205+3,140+84=29,629로 일치). n(사업 보유 기관 수)은 응답기관 수×있음%로 계산(6×66.7%=4). 전체 행 mean은 29,629/4로 계산(보고서는 합계만 공표). 본문: '6개의 중앙행정기관의 환경교육 사업 총예산은 약 290억 정도였으며, 그 중 환경부의 예산이 210억 이상'. [보고서 내부 불일치] 사업별 목록인 표2-12(pdf 76~77)의 전체 행 '사업 예산'은 14,710으로 인쇄되어 표2-11의 29,629와 다름. 표2-12의 사업별 예산을 기관별로 더하면(전사자 계산) 환경부 31건 8,311, 농림축산식품부 1건 3,175, 해양수산부 2건 3,140(1,350+1,790), 기상청 1건 84로 합 14,710이며, 환경부(21,200 대 8,311)와 농림축산식품부(5,205 대 3,175)가 표2-11과 다름. 표·본문이 일치하는 표2-11을 따름. 사업명·담당 부서 목록(표2-12; 주석 '* 사업 정보 : 자체 환경교육 사업이 있다고 응답한 본청과 외청에서 작성한 사업 정보')은 전사하지 않음.",
+   "rows": [
+    {"by": "all", "key": "all", "n": 4, "mean": 7407.25, "total": 29629},
+    {"by": "unit", "key": "env", "n": 1, "mean": 21200},
+    {"by": "unit", "key": "edu", "n": 0, "mean": null},
+    {"by": "unit", "key": "agri", "n": 1, "mean": 5205},
+    {"by": "unit", "key": "ocean", "n": 1, "mean": 3140},
+    {"by": "unit", "key": "kma", "n": 1, "mean": 84},
+    {"by": "unit", "key": "forest", "n": 0, "mean": null}
+   ]
+  },
+  {
+   "qid": "CEN_PROGRAM_N",
+   "label": "자체 환경교육 사업 수",
+   "short": "사업 수",
+   "section": "사업/예산",
+   "type": "numeric",
+   "base": {"qid": "CEN_PROGRAM_YN", "eq": 1},
+   "baseKind": "기관",
+   "source": [{"ref": "표2-11", "pdf": 75}, {"ref": "표2-12", "pdf": 76}, {"ref": "표2-12", "pdf": 77}],
+   "notes": "표2-11 '사업 수' 열(전체 35, 환경부 31, 농림축산식품부 1, 해양수산부 2, 기상청 1). 표2-12 전체 행 사업명 개수도 35로 일치하고 목록 행 수도 기관별로 같음. n(사업 보유 기관 수)은 응답기관 수×있음%로 계산(6×66.7%=4). 전체 행 mean은 35/4로 계산.",
+   "rows": [
+    {"by": "all", "key": "all", "n": 4, "mean": 8.75, "total": 35},
+    {"by": "unit", "key": "env", "n": 1, "mean": 31},
+    {"by": "unit", "key": "edu", "n": 0, "mean": null},
+    {"by": "unit", "key": "agri", "n": 1, "mean": 1},
+    {"by": "unit", "key": "ocean", "n": 1, "mean": 2},
+    {"by": "unit", "key": "kma", "n": 1, "mean": 1},
+    {"by": "unit", "key": "forest", "n": 0, "mean": null}
+   ]
+  },
+  {
+   "qid": "CEN_MATERIAL_YN",
+   "label": "자체 개발 교보재 여부",
+   "short": "자체 교보재 여부",
+   "section": "교보재",
+   "indicator": "material",
+   "type": "binary",
+   "categories": ["없음", "있음"],
+   "baseKind": "기관",
+   "source": [{"ref": "표2-13", "pdf": 78}, {"ref": "그림2-7", "pdf": 78}],
+   "notes": "2025 전사본(중앙행정기관)에 없는 2024 문항. 그림2-7 Base 문구: '[Base: 중앙행정기관 응답자 (n=12), 단위: %]'. 표2-13 주석: '* 응답기관 수 : 설문조사에 응답한 본청, 외청, 소속기관 수'. 분모는 소속기관 응답을 포함한 12곳. 인쇄된 응답기관 수 구성(계=본청/외청/소속기관): 전체 12=4/2/6, 환경부 1=1/-/-, 교육부 2=1/-/1, 농림축산식품부 1=1/-/-, 해양수산부 1=1/-/-, 기상청 1=-/1/-, 산림청 6=-/1/5. 표는 %만 인쇄; 전체 행 counts는 응답기관 수×%로 계산(12×25.0%=3, 12×75.0%=9). 여부 표의 '-'는 0.0.",
+   "rows": [
+    {"by": "all", "key": "all", "n": 12, "pct": [75.0, 25.0], "positive": 25.0, "counts": [9, 3]},
+    {"by": "unit", "key": "env", "n": 1, "pct": [0.0, 100.0], "positive": 100.0},
+    {"by": "unit", "key": "edu", "n": 2, "pct": [100.0, 0.0], "positive": 0.0},
+    {"by": "unit", "key": "agri", "n": 1, "pct": [100.0, 0.0], "positive": 0.0},
+    {"by": "unit", "key": "ocean", "n": 1, "pct": [0.0, 100.0], "positive": 100.0},
+    {"by": "unit", "key": "kma", "n": 1, "pct": [0.0, 100.0], "positive": 100.0},
+    {"by": "unit", "key": "forest", "n": 6, "pct": [100.0, 0.0], "positive": 0.0}
+   ]
+  },
+  {
+   "qid": "CEN_MATERIAL_N",
+   "label": "자체 개발 교보재 수",
+   "short": "자체 교보재 수",
+   "section": "교보재",
+   "type": "numeric",
+   "base": {"qid": "CEN_MATERIAL_YN", "eq": 1},
+   "baseKind": "기관",
+   "source": [{"ref": "표2-13", "pdf": 78}, {"ref": "표2-14", "pdf": 79}],
+   "notes": "2025 전사본(중앙행정기관)에 없는 2024 문항. 표2-13 '교보재 수 계'(전체 14, 환경부 5, 해양수산부 4, 기상청 5는 인쇄값). n(보유 기관 수)은 응답기관 수×있음%로 계산(12×25.0%=3). 전체 행 mean은 14/3으로 계산. 표2-14(목록) 전체 행도 14(교재 12, 교구 2)로 일치. 교보재 명 목록(표2-14; 주석 '* 교보재 정보 : 자체 개발 교보재가 있다고 응답한 본청과 외청에서 작성한 교보재 정보')은 전사하지 않음.",
+   "rows": [
+    {"by": "all", "key": "all", "n": 3, "mean": 4.67, "total": 14},
+    {"by": "unit", "key": "env", "n": 1, "mean": 5},
+    {"by": "unit", "key": "edu", "n": 0, "mean": null},
+    {"by": "unit", "key": "agri", "n": 0, "mean": null},
+    {"by": "unit", "key": "ocean", "n": 1, "mean": 4},
+    {"by": "unit", "key": "kma", "n": 1, "mean": 5},
+    {"by": "unit", "key": "forest", "n": 0, "mean": null}
+   ]
+  },
+  {
+   "qid": "CEN_MATERIAL_KIND",
+   "label": "자체 개발 교보재 구분(교재/교구)",
+   "short": "교보재 구분",
+   "section": "교보재",
+   "type": "events",
+   "categories": ["교재", "교구"],
+   "base": {"qid": "CEN_MATERIAL_YN", "eq": 1},
+   "baseKind": "교보재 건",
+   "source": [{"ref": "표2-13", "pdf": 78}, {"ref": "표2-14", "pdf": 79}],
+   "notes": "2025 전사본(중앙행정기관)에 없는 2024 문항. counts=표2-13 '교재 수'·'교구 수' 인쇄값(개), events=교보재 수 계(인쇄값), n=보유 기관 수(응답기관 수×있음%로 계산), mean=events/n(계산), pct=교보재 기준 구성비(전사자 계산). '-'는 null. 본문: '전반적으로 교구에 비해 교재를 개발한 경우가 많은 편'.",
+   "rows": [
+    {"by": "all", "key": "all", "n": 3, "events": 14, "mean": 4.67, "pct": [85.7, 14.3], "counts": [12, 2]},
+    {"by": "unit", "key": "env", "n": 1, "events": 5, "mean": 5, "pct": [60.0, 40.0], "counts": [3, 2]},
+    {"by": "unit", "key": "edu", "n": 0, "events": null, "mean": null, "pct": null, "counts": null},
+    {"by": "unit", "key": "agri", "n": 0, "events": null, "mean": null, "pct": null, "counts": null},
+    {"by": "unit", "key": "ocean", "n": 1, "events": 4, "mean": 4, "pct": [100.0, null], "counts": [4, null]},
+    {"by": "unit", "key": "kma", "n": 1, "events": 5, "mean": 5, "pct": [100.0, null], "counts": [5, null]},
+    {"by": "unit", "key": "forest", "n": 0, "events": null, "mean": null, "pct": null, "counts": null}
+   ]
+  },
+  {
+   "qid": "CEN_MATERIAL_TARGET",
+   "label": "자체 개발 교보재 대상(중복응답)",
+   "short": "교보재 대상",
+   "section": "교보재",
+   "type": "multi",
+   "categories": ["유아(만6세 이하)", "초등(만7~12세)", "청소년(중등 만13~15세)", "청소년(고등 만16~18세)", "청년(만19~34세)", "중장년(만35~64세)", "노년(만65세 이상)"],
+   "base": {"qid": "CEN_MATERIAL_YN", "eq": 1},
+   "baseKind": "교보재 건",
+   "source": [{"ref": "표2-15", "pdf": 80}, {"ref": "그림2-8", "pdf": 80}],
+   "notes": "2025 전사본(중앙행정기관)에 없는 2024 문항. 그림2-8 Base 문구: '[Base: 전체 교보재 수 (n=14), 단위: %]'. 표2-15 주석: '* 총 교보재 수 : 자체 개발한 교보재가 있다고 응답한 본청, 외청, 소속기관에서 개발한 교보재 수', '* 2개까지 복수 응답 허용'. n=총 교보재 수(인쇄값), pct는 인쇄값, 건수는 인쇄되지 않아 counts 없음. '-'는 null. [주의] Base는 교보재 14건으로 적혀 있으나 기관 행의 %가 모두 100 또는 '-'이고 전체 행 33.3은 교보재 건 기준(예: 기상청 5/14=35.7)이 아니라 보유 기관 3곳 중 1곳(1/3)에 해당하는 값이어서, 실제로는 기관 단위 응답을 평균한 값으로 보임(전사자 해석, 값은 인쇄 그대로). 환경부는 4개 대상에 100으로 '2개까지' 주석과도 맞지 않음. 그림2-8의 축 라벨은 '청소년(고등 만19~34세)'로 인쇄되어 표의 '만16~18세'와 다름(표를 따름). 본문: '초등 및 청소년(중등) 대상인 경우가 100%로 가장 많았으며, 다음으로는 유아, 청년, 중장년이 33.3%'.",
+   "rows": [
+    {"by": "all", "key": "all", "n": 14, "pct": [33.3, 100.0, 100.0, null, 33.3, 33.3, null]},
+    {"by": "unit", "key": "env", "n": 5, "pct": [null, 100.0, 100.0, null, 100.0, 100.0, null]},
+    {"by": "unit", "key": "edu", "n": 0, "pct": null},
+    {"by": "unit", "key": "agri", "n": 0, "pct": null},
+    {"by": "unit", "key": "ocean", "n": 4, "pct": [null, 100.0, 100.0, null, null, null, null]},
+    {"by": "unit", "key": "kma", "n": 5, "pct": [100.0, 100.0, 100.0, null, null, null, null]},
+    {"by": "unit", "key": "forest", "n": 0, "pct": null}
+   ]
+  },
+  {
+   "qid": "CEN_MATERIAL_TOPIC",
+   "label": "자체 개발 교보재 주제(중복응답)",
+   "short": "교보재 주제",
+   "section": "교보재",
+   "type": "multi",
+   "categories": ["기후변화 및 탄소중립", "대기", "에너지", "소음", "폐기물 및 자원순환", "환경보건", "물", "토양", "생태계", "지속가능발전", "생명윤리", "기타"],
+   "base": {"qid": "CEN_MATERIAL_YN", "eq": 1},
+   "baseKind": "교보재 건",
+   "source": [{"ref": "표2-16", "pdf": 81}, {"ref": "그림2-9", "pdf": 81}],
+   "notes": "2025 전사본(중앙행정기관)에 없는 2024 문항. 그림2-9 Base 문구: '[Base: 전체 교보재 수 (n=14), 단위: %]'. 표2-16 주석: '* 총 교보재 수 : 자체 개발한 교보재가 있다고 응답한 본청, 외청, 소속기관에서 개발한 교보재 수', '* 3개까지 복수 응답 허용'. n=총 교보재 수(인쇄값), pct는 인쇄값, 건수는 인쇄되지 않아 counts 없음. '-'는 null. [주의] 기관 행의 %가 모두 100 또는 '-'이고 전체 행 66.7·33.3은 보유 기관 3곳 중 2곳·1곳에 해당하는 값이어서, 교보재 건 기준이 아니라 기관 단위 응답을 평균한 값으로 보임(전사자 해석, 값은 인쇄 그대로). 본문: '기후변화 및 탄소중립을 주제로 하는 경우가 66.7%로 가장 많았으며, 환경부는 생태계를 주제로 하는 경우도 많은 편'.",
+   "rows": [
+    {"by": "all", "key": "all", "n": 14, "pct": [66.7, null, null, null, null, null, null, null, 33.3, null, null, 66.7]},
+    {"by": "unit", "key": "env", "n": 5, "pct": [100.0, null, null, null, null, null, null, null, 100.0, null, null, 100.0]},
+    {"by": "unit", "key": "edu", "n": 0, "pct": null},
+    {"by": "unit", "key": "agri", "n": 0, "pct": null},
+    {"by": "unit", "key": "ocean", "n": 4, "pct": [null, null, null, null, null, null, null, null, null, null, null, 100.0]},
+    {"by": "unit", "key": "kma", "n": 5, "pct": [100.0, null, null, null, null, null, null, null, null, null, null, null]},
+    {"by": "unit", "key": "forest", "n": 0, "pct": null}
+   ]
+  },
+  {
+   "qid": "CEN_FACILITY_YN",
+   "label": "환경교육 진행 시설 보유 여부",
+   "short": "시설 보유 여부",
+   "section": "시설",
+   "indicator": "facility",
+   "type": "binary",
+   "categories": ["보유하고 있지 않음", "보유하고 있음"],
+   "baseKind": "기관",
+   "source": [{"ref": "표2-17", "pdf": 82}, {"ref": "그림2-10", "pdf": 82}],
+   "notes": "그림2-10 Base 문구: '[Base: 중앙행정기관 응답자 (n=12), 단위: %]'. 표2-17 주석: '* 응답기관 수 : 설문조사에 응답한 본청, 외청, 소속기관 수'. 분모가 본청·외청 6곳이 아니라 소속기관 응답을 포함한 12곳임(2025 전사본은 n=6). 인쇄된 응답기관 수 구성(계=본청/외청/소속기관): 전체 12=4/2/6, 환경부 1=1/-/-, 교육부 2=1/-/1, 농림축산식품부 1=1/-/-, 해양수산부 1=1/-/-, 기상청 1=-/1/-, 산림청 6=-/1/5. 표는 %만 인쇄; 전체 행 counts는 응답기관 수×%로 계산(12×41.7%=5, 12×58.3%=7). 여부 표의 '-'는 0.0.",
+   "rows": [
+    {"by": "all", "key": "all", "n": 12, "pct": [58.3, 41.7], "positive": 41.7, "counts": [7, 5]},
+    {"by": "unit", "key": "env", "n": 1, "pct": [0.0, 100.0], "positive": 100.0},
+    {"by": "unit", "key": "edu", "n": 2, "pct": [100.0, 0.0], "positive": 0.0},
+    {"by": "unit", "key": "agri", "n": 1, "pct": [100.0, 0.0], "positive": 0.0},
+    {"by": "unit", "key": "ocean", "n": 1, "pct": [0.0, 100.0], "positive": 100.0},
+    {"by": "unit", "key": "kma", "n": 1, "pct": [100.0, 0.0], "positive": 0.0},
+    {"by": "unit", "key": "forest", "n": 6, "pct": [50.0, 50.0], "positive": 50.0}
+   ]
+  },
+  {
+   "qid": "CEN_FACILITY_N",
+   "label": "환경교육 진행 시설 수",
+   "short": "시설 수",
+   "section": "시설",
+   "type": "numeric",
+   "base": {"qid": "CEN_FACILITY_YN", "eq": 1},
+   "baseKind": "기관",
+   "source": [{"ref": "표2-17", "pdf": 82}, {"ref": "표2-18", "pdf": 83}],
+   "notes": "표2-17 '환경교육 시설 수 계'(전체 12, 환경부 6, 해양수산부 2, 산림청 4는 인쇄값). n(보유 기관 수)은 인쇄값이 아니라 표2-17 응답기관 수×보유%로 계산(전체 12×41.7%=5, 환경부 1, 해양수산부 1, 산림청 6×50.0%=3; 소속기관 응답 포함). mean은 total/n으로 계산(전체 12/5=2.4, 산림청 4/3=1.33). 표2-18(목록)의 운영 방식 합계(직접 4, 위탁 6, 소속기관 2)와 일치. 시설명·운영 기관 명 목록(표2-18; 주석 '* 시설 정보 : 환경교육 진행 시설이 있다고 응답한 본청과 외청에서 작성한 시설 정보')은 전사하지 않음.",
+   "rows": [
+    {"by": "all", "key": "all", "n": 5, "mean": 2.4, "total": 12},
+    {"by": "unit", "key": "env", "n": 1, "mean": 6, "total": 6},
+    {"by": "unit", "key": "edu", "n": 0, "mean": null},
+    {"by": "unit", "key": "agri", "n": 0, "mean": null},
+    {"by": "unit", "key": "ocean", "n": 1, "mean": 2, "total": 2},
+    {"by": "unit", "key": "kma", "n": 0, "mean": null},
+    {"by": "unit", "key": "forest", "n": 3, "mean": 1.33, "total": 4}
+   ]
+  },
+  {
+   "qid": "CEN_FACILITY_TYPE",
+   "label": "환경교육 진행 시설 운영 방식",
+   "short": "시설 운영 방식",
+   "section": "시설",
+   "type": "events",
+   "categories": ["직접 운영", "위탁 운영", "외청 운영", "소속기관 운영"],
+   "base": {"qid": "CEN_FACILITY_YN", "eq": 1},
+   "baseKind": "시설 건",
+   "source": [{"ref": "표2-17", "pdf": 82}, {"ref": "표2-18", "pdf": 83}],
+   "notes": "counts=표2-17 시설 수 인쇄값(개), events=시설 수 계(인쇄값), n=보유 기관 수(응답기관 수×보유%로 계산: 전체 5, 산림청 3; 소속기관 응답 포함), mean=events/n(계산), pct=시설 기준 구성비(전사자 계산). '-'는 null. 표2-18 전체 행(직접 4, 위탁 6, 외청 '-', 소속기관 2)과 일치. 본문: '환경교육 진행 시설은 대부분이 중앙행정기관의 직접 운영 혹은 위탁 운영의 형태'.",
+   "rows": [
+    {"by": "all", "key": "all", "n": 5, "events": 12, "mean": 2.4, "pct": [33.3, 50.0, null, 16.7], "counts": [4, 6, null, 2]},
+    {"by": "unit", "key": "env", "n": 1, "events": 6, "mean": 6, "pct": [null, 66.7, null, 33.3], "counts": [null, 4, null, 2]},
+    {"by": "unit", "key": "edu", "n": 0, "events": null, "mean": null, "pct": null, "counts": null},
+    {"by": "unit", "key": "agri", "n": 0, "events": null, "mean": null, "pct": null, "counts": null},
+    {"by": "unit", "key": "ocean", "n": 1, "events": 2, "mean": 2, "pct": [null, 100.0, null, null], "counts": [null, 2, null, null]},
+    {"by": "unit", "key": "kma", "n": 0, "events": null, "mean": null, "pct": null, "counts": null},
+    {"by": "unit", "key": "forest", "n": 3, "events": 4, "mean": 1.33, "pct": [100.0, null, null, null], "counts": [4, null, null, null]}
+   ]
+  },
+  {
+   "qid": "CEN_TRAINING_MANDATE_YN",
+   "label": "소속 직원 대상 환경 주제 연수 의무교육 시간 지정 여부",
+   "short": "연수 의무시간 지정",
+   "section": "연수",
+   "type": "binary",
+   "categories": ["아니오", "예"],
+   "baseKind": "기관",
+   "source": [{"ref": "표2-19", "pdf": 84}, {"ref": "그림2-11", "pdf": 84}],
+   "notes": "2025 전사본에 없는 2024 문항. 그림2-11 Base 문구: '[Base: 중앙행정기관 본청 응답자 (n=6), 단위: %]'. 표2-19 주석: '* 응답기관 수 : 설문조사에 응답한 본청과 외청 기관 수'. 표는 %만 인쇄; 전체 행 counts는 응답기관 수×%로 계산(6×33.3%=2, 6×66.7%=4). 여부 표의 '-'는 0.0.",
+   "rows": [
+    {"by": "all", "key": "all", "n": 6, "pct": [66.7, 33.3], "positive": 33.3, "counts": [4, 2]},
+    {"by": "unit", "key": "env", "n": 1, "pct": [0.0, 100.0], "positive": 100.0},
+    {"by": "unit", "key": "edu", "n": 1, "pct": [100.0, 0.0], "positive": 0.0},
+    {"by": "unit", "key": "agri", "n": 1, "pct": [100.0, 0.0], "positive": 0.0},
+    {"by": "unit", "key": "ocean", "n": 1, "pct": [100.0, 0.0], "positive": 0.0},
+    {"by": "unit", "key": "kma", "n": 1, "pct": [0.0, 100.0], "positive": 100.0},
+    {"by": "unit", "key": "forest", "n": 1, "pct": [100.0, 0.0], "positive": 0.0}
+   ]
+  },
+  {
+   "qid": "CEN_TRAINING_YN",
+   "label": "소속 직원 대상 자체 환경 주제 연수 실시 여부",
+   "short": "직원 환경 연수 실시",
+   "section": "연수",
+   "indicator": "training",
+   "type": "binary",
+   "categories": ["실시하지 않았음", "실시하였음"],
+   "baseKind": "기관",
+   "source": [{"ref": "표2-20", "pdf": 85}, {"ref": "그림2-12", "pdf": 85}],
+   "notes": "그림2-12 Base 문구: '[Base: 중앙행정기관 본청 응답자 (n=6), 단위: %]'. 표2-20 주석: '* 응답기관 수 : 설문조사에 응답한 본청과 외청 기관 수'. 표는 %만 인쇄; 전체 행 counts는 응답기관 수×%로 계산(6×33.3%=2, 6×66.7%=4). 여부 표의 '-'는 0.0.",
+   "rows": [
+    {"by": "all", "key": "all", "n": 6, "pct": [66.7, 33.3], "positive": 33.3, "counts": [4, 2]},
+    {"by": "unit", "key": "env", "n": 1, "pct": [0.0, 100.0], "positive": 100.0},
+    {"by": "unit", "key": "edu", "n": 1, "pct": [100.0, 0.0], "positive": 0.0},
+    {"by": "unit", "key": "agri", "n": 1, "pct": [100.0, 0.0], "positive": 0.0},
+    {"by": "unit", "key": "ocean", "n": 1, "pct": [100.0, 0.0], "positive": 0.0},
+    {"by": "unit", "key": "kma", "n": 1, "pct": [0.0, 100.0], "positive": 100.0},
+    {"by": "unit", "key": "forest", "n": 1, "pct": [100.0, 0.0], "positive": 0.0}
+   ]
+  },
+  {
+   "qid": "CEN_TRAINING_N",
+   "label": "소속 직원 대상 자체 환경 주제 연수 수",
+   "short": "연수 수",
+   "section": "연수",
+   "type": "numeric",
+   "base": {"qid": "CEN_TRAINING_YN", "eq": 1},
+   "baseKind": "기관",
+   "source": [{"ref": "표2-20", "pdf": 85}, {"ref": "표2-21", "pdf": 86}],
+   "notes": "표2-20 '실시한 연수 개수 계'(전체 17, 환경부 16, 기상청 1은 인쇄값). n(실시 기관 수)은 응답기관 수×실시%로 계산(6×33.3%=2). 전체 행 mean은 17/2로 계산. 표2-21(목록) 전체 행 집합교육 17과 일치. 연수명 목록(표2-21; 주석 '* 연수 방법 : 연수를 실시하였다고 응답한 본청과 외청에서 작성한 연수 정보')은 전사하지 않음.",
+   "rows": [
+    {"by": "all", "key": "all", "n": 2, "mean": 8.5, "total": 17},
+    {"by": "unit", "key": "env", "n": 1, "mean": 16},
+    {"by": "unit", "key": "edu", "n": 0, "mean": null},
+    {"by": "unit", "key": "agri", "n": 0, "mean": null},
+    {"by": "unit", "key": "ocean", "n": 0, "mean": null},
+    {"by": "unit", "key": "kma", "n": 1, "mean": 1},
+    {"by": "unit", "key": "forest", "n": 0, "mean": null}
+   ]
+  },
+  {
+   "qid": "CEN_TRAINING_METHOD",
+   "label": "실시한 자체 환경 주제 연수 방법(집합·원격·혼합)",
+   "short": "연수 방법",
+   "section": "연수",
+   "type": "events",
+   "categories": ["집합교육", "원격교육", "혼합교육"],
+   "base": {"qid": "CEN_TRAINING_YN", "eq": 1},
+   "baseKind": "연수 건",
+   "source": [{"ref": "표2-20", "pdf": 85}, {"ref": "표2-21", "pdf": 86}],
+   "notes": "counts=표2-20 연수 개수 인쇄값, events=계(인쇄값), n=실시 기관 수(응답기관 수×실시%로 계산), mean=events/n(계산), pct=연수 기준 구성비(전사자 계산). 모든 연수가 집합교육(본문: '모든 환경교육 연수는 집합교육으로 이루어짐'). '-'는 null.",
+   "rows": [
+    {"by": "all", "key": "all", "n": 2, "events": 17, "mean": 8.5, "pct": [100.0, null, null], "counts": [17, null, null]},
+    {"by": "unit", "key": "env", "n": 1, "events": 16, "mean": 16, "pct": [100.0, null, null], "counts": [16, null, null]},
+    {"by": "unit", "key": "edu", "n": 0, "events": null, "mean": null, "pct": null, "counts": null},
+    {"by": "unit", "key": "agri", "n": 0, "events": null, "mean": null, "pct": null, "counts": null},
+    {"by": "unit", "key": "ocean", "n": 0, "events": null, "mean": null, "pct": null, "counts": null},
+    {"by": "unit", "key": "kma", "n": 1, "events": 1, "mean": 1, "pct": [100.0, null, null], "counts": [1, null, null]},
+    {"by": "unit", "key": "forest", "n": 0, "events": null, "mean": null, "pct": null, "counts": null}
+   ]
+  },
+  {
+   "qid": "CEN_TRAINING_TOPIC",
+   "label": "소속 직원 대상 실시 자체 환경 주제 연수 주제(중복응답)",
+   "short": "연수 주제",
+   "section": "연수",
+   "type": "multi",
+   "categories": ["기후변화 및 탄소중립", "대기", "에너지", "소음", "폐기물 및 자원순환", "환경보건", "물", "토양", "생태계", "지속가능발전", "생명윤리", "기타"],
+   "base": {"qid": "CEN_TRAINING_YN", "eq": 1},
+   "baseKind": "연수 건",
+   "source": [{"ref": "표2-22", "pdf": 87}, {"ref": "그림2-13", "pdf": 87}],
+   "notes": "그림2-13 Base 문구: '[Base: 전체 연수 개수 (n=17), 단위: %]'. 표2-22 주석: '* 총 환경 주제 연수 개수 : 연수를 실시하였다고 응답한 본청과 외청의 총 환경교육 연수 개수', '* 3개까지 복수 응답 허용'. n=총 환경 주제 연수 개수(인쇄값), pct는 인쇄값, 건수는 인쇄되지 않아 counts 없음(2025 보고서는 건수도 인쇄). '-'는 null. [주의] 기관 행의 %가 모두 100 또는 '-'이고 전체 행 50.0은 연수 건 기준(환경부 16/17=94.1)이 아니라 실시 기관 2곳 중 1곳에 해당하는 값이어서, 연수 건 기준이 아니라 기관 단위 응답을 평균한 값으로 보임(전사자 해석, 값은 인쇄 그대로). 환경부는 5개 주제에 100으로 '3개까지' 주석과도 맞지 않음. 본문: '연수는 주로 기후변화 및 탄소중립을 주제로 진행되었으며, 환경부는 대기, 폐기물 및 자원순환, 물, 지속가능 발전에 대한 연수도 실시'.",
+   "rows": [
+    {"by": "all", "key": "all", "n": 17, "pct": [100.0, 50.0, null, null, 50.0, null, 50.0, null, null, 50.0, null, null]},
+    {"by": "unit", "key": "env", "n": 16, "pct": [100.0, 100.0, null, null, 100.0, null, 100.0, null, null, 100.0, null, null]},
+    {"by": "unit", "key": "edu", "n": 0, "pct": null},
+    {"by": "unit", "key": "agri", "n": 0, "pct": null},
+    {"by": "unit", "key": "ocean", "n": 0, "pct": null},
+    {"by": "unit", "key": "kma", "n": 1, "pct": [100.0, null, null, null, null, null, null, null, null, null, null, null]},
+    {"by": "unit", "key": "forest", "n": 0, "pct": null}
+   ]
+  },
+  {
+   "qid": "CEN_COUNCIL_YN",
+   "label": "공식적 회의체 구성 여부",
+   "short": "회의체 구성 여부",
+   "section": "거버넌스",
+   "indicator": "council",
+   "type": "binary",
+   "categories": ["없음", "있음"],
+   "baseKind": "기관",
+   "source": [{"ref": "표2-23", "pdf": 88}, {"ref": "그림2-14", "pdf": 88}],
+   "notes": "그림2-14 Base 문구: '[Base: 중앙행정기관 본청 응답자 (n=6), 단위: %]'. 표2-23 주석: '* 응답기관 수 : 설문조사에 응답한 본청과 외청 기관 수'. 보기는 2024 인쇄 그대로 '있음/없음'(2025 전사본은 '구성함/구성하지 않음'). 표는 %만 인쇄; 전체 행 counts는 응답기관 수×%로 계산(6×16.7%=1, 6×83.3%=5). 여부 표의 '-'는 0.0. 본문: '환경부만 … 회의체가 구성되어 있으며, 그 수는 3개'.",
+   "rows": [
+    {"by": "all", "key": "all", "n": 6, "pct": [83.3, 16.7], "positive": 16.7, "counts": [5, 1]},
+    {"by": "unit", "key": "env", "n": 1, "pct": [0.0, 100.0], "positive": 100.0},
+    {"by": "unit", "key": "edu", "n": 1, "pct": [100.0, 0.0], "positive": 0.0},
+    {"by": "unit", "key": "agri", "n": 1, "pct": [100.0, 0.0], "positive": 0.0},
+    {"by": "unit", "key": "ocean", "n": 1, "pct": [100.0, 0.0], "positive": 0.0},
+    {"by": "unit", "key": "kma", "n": 1, "pct": [100.0, 0.0], "positive": 0.0},
+    {"by": "unit", "key": "forest", "n": 1, "pct": [100.0, 0.0], "positive": 0.0}
+   ]
+  },
+  {
+   "qid": "CEN_COUNCIL_N",
+   "label": "구성한 공식적 회의체 수",
+   "short": "회의체 수",
+   "section": "거버넌스",
+   "type": "numeric",
+   "base": {"qid": "CEN_COUNCIL_YN", "eq": 1},
+   "baseKind": "기관",
+   "source": [{"ref": "표2-23", "pdf": 88}, {"ref": "표2-24", "pdf": 89}],
+   "notes": "표2-23 '구성한 회의체 수'(전체 3, 환경부 3은 인쇄값). n(구성 기관 수)은 응답기관 수×있음%로 계산(6×16.7%=1). 전체 행 mean은 3/1로 계산. 표2-24 전체 행 위원회 명칭 3·구성 근거 3과 일치. 위원회 명칭·구성 근거 목록(표2-24)은 전사하지 않음.",
+   "rows": [
+    {"by": "all", "key": "all", "n": 1, "mean": 3.0, "total": 3},
+    {"by": "unit", "key": "env", "n": 1, "mean": 3},
+    {"by": "unit", "key": "edu", "n": 0, "mean": null},
+    {"by": "unit", "key": "agri", "n": 0, "mean": null},
+    {"by": "unit", "key": "ocean", "n": 0, "mean": null},
+    {"by": "unit", "key": "kma", "n": 0, "mean": null},
+    {"by": "unit", "key": "forest", "n": 0, "mean": null}
+   ]
+  },
+  {
+   "qid": "CEN_COUNCIL_MEETINGS",
+   "label": "공식적 회의체 회의 수(회)",
+   "short": "회의 수",
+   "section": "거버넌스",
+   "type": "numeric",
+   "base": {"qid": "CEN_COUNCIL_YN", "eq": 1},
+   "baseKind": "기관",
+   "source": [{"ref": "표2-24", "pdf": 89}],
+   "notes": "표2-24 열 제목은 '2023년 회의 수'. 표2-24 주석: '* 회의체 구성 정보 : 공식적 회의체를 구성했다고 응답한 본청과 외청에서 작성한 회의체 구성 정보'. 전체 10은 인쇄값. 환경부 10은 회의체별 인쇄값을 합산(환경교육위원회 5 + 생물자원관 협의체 3 + 환경교육훈련협의회 2 = 10). n(구성 기관 수)은 표2-23 응답기관 수×있음%로 계산(1). 전체 행 mean은 10/1; 회의체(3개)당 평균은 3.33.",
+   "rows": [
+    {"by": "all", "key": "all", "n": 1, "mean": 10.0, "total": 10},
+    {"by": "unit", "key": "env", "n": 1, "mean": 10},
+    {"by": "unit", "key": "edu", "n": 0, "mean": null},
+    {"by": "unit", "key": "agri", "n": 0, "mean": null},
+    {"by": "unit", "key": "ocean", "n": 0, "mean": null},
+    {"by": "unit", "key": "kma", "n": 0, "mean": null},
+    {"by": "unit", "key": "forest", "n": 0, "mean": null}
+   ]
+  }
+ ]
+}

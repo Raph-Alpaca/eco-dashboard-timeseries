@@ -294,23 +294,29 @@ export function optionDumbbell(rows, { aName = "학생", bName = "교원", measu
           const pa = api.coord([a, params.dataIndex]), pb = api.coord([b, params.dataIndex]);
           return { type: "line", shape: { x1: pa[0], y1: pa[1], x2: pb[0], y2: pb[1] }, style: { stroke: "#c8d1cc", lineWidth: 2 } };
         }, data: rows.map(r => [r.a, r.b]), tooltip: { show: false }, z: 1 },
-      { name: aName, type: "scatter", symbolSize: 12, itemStyle: { color: PALETTE[0] }, data: rows.map(r => num(r.a)), z: 3,
+      // 값 라벨은 작은 쪽을 왼쪽, 큰 쪽을 오른쪽에 둔다(두 점이 가까울 때 글자가 겹치지 않도록)
+      { name: aName, type: "scatter", symbolSize: 12, itemStyle: { color: PALETTE[0] }, z: 3,
+        data: rows.map(r => ({ value: num(r.a), label: { position: r.b != null && r.a > r.b ? "right" : "left" } })),
         label: { show: true, position: "left", fontSize: 10, color: INK2, formatter: p => fmtMeasure(p.value, measure, true) } },
-      { name: bName, type: "scatter", symbolSize: 12, itemStyle: { color: PALETTE[1] }, data: rows.map(r => num(r.b)), z: 3,
+      { name: bName, type: "scatter", symbolSize: 12, itemStyle: { color: PALETTE[1] }, z: 3,
+        data: rows.map(r => ({ value: num(r.b), label: { position: r.a != null && r.a > r.b ? "left" : "right" } })),
         label: { show: true, position: "right", fontSize: 10, color: INK2, formatter: p => fmtMeasure(p.value, measure, true) } },
     ],
   });
 }
 
-/** 지표 × 기관유형 히트맵. cells: [{x, y, value, text, short}] */
-export function optionIndicatorHeatmap(xs, ys, cells) {
+/** 지표 × 기관유형 히트맵. cells: [{x, y, value, text, short}] — blank:true 인 칸은 색 없이 글자만 표시 */
+export function optionIndicatorHeatmap(xs, ys, cells, { min = 0, max = 100, colors = SEQ.slice(1), text = ["100%", "0%"] } = {}) {
   return baseOption({
     grid: { left: 10, right: 10, top: 10, bottom: 60, containLabel: true },
     tooltip: { trigger: "item", formatter: p => `<b>${xs[p.data.value[0]]}</b> · ${ys[p.data.value[1]]}<br>${p.data.text}` },
     xAxis: { type: "category", data: xs, position: "top", ...axisBase, splitLine: { show: false }, axisLabel: { ...axisBase.axisLabel, interval: 0, width: 80, overflow: "break" } },
     yAxis: { type: "category", data: ys, inverse: true, ...axisBase, splitLine: { show: false }, axisLabel: { ...axisBase.axisLabel, width: 120, overflow: "truncate" } },
-    visualMap: { min: 0, max: 100, orient: "horizontal", left: "center", bottom: 0, itemHeight: 140, itemWidth: 12, inRange: { color: SEQ.slice(1) }, text: ["100%", "0%"], textStyle: { color: INK2, fontSize: 11 } },
-    series: [{ type: "heatmap", data: cells.map(c => ({ value: [c.x, c.y, c.value], text: c.text, short: c.short })), itemStyle: { borderColor: "#fff", borderWidth: 2 },
+    visualMap: { min, max, orient: "horizontal", left: "center", bottom: 0, itemHeight: 140, itemWidth: 12, inRange: { color: colors }, text, textStyle: { color: INK2, fontSize: 11 } },
+    // blank: 색을 입히지 않는 칸(값이 없거나 잇지 않는 지표) — visualMap 에서 빼고 옅은 회색으로 둔다
+    series: [{ type: "heatmap", data: cells.map(c => (c.blank
+        ? { value: [c.x, c.y, 0], text: c.text, short: c.short, visualMap: false, itemStyle: { color: "#f3f5f4", borderColor: "#fff", borderWidth: 2 }, label: { color: INK3 } }
+        : { value: [c.x, c.y, c.value], text: c.text, short: c.short })), itemStyle: { borderColor: "#fff", borderWidth: 2 },
       label: { show: true, fontSize: 11, color: INK, formatter: p => p.data.short } }],
   });
 }

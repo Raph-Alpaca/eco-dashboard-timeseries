@@ -1,0 +1,487 @@
+{
+  "schemaVersion": 1,
+  "survey": "status_survey",
+  "pop": "inst_public",
+  "year": 2024,
+  "refDate": "2023-12-31",
+  "sourceDoc": "2024년 환경교육 실태조사 보고서",
+  "tables": [
+    {
+      "qid": "PUB_DEPT_YN",
+      "label": "환경교육 업무 담당 부서 및 인력 여부",
+      "short": "담당 부서·인력 여부",
+      "section": "조직/인력",
+      "indicator": "staff",
+      "type": "binary",
+      "categories": ["없음", "있음"],
+      "positive": [1],
+      "baseKind": "기관",
+      "source": [{"ref": "그림2-60", "pdf": 191}, {"ref": "표2-92", "pdf": 191}, {"ref": "표2-93", "pdf": 192}],
+      "notes": "그림 Base: '[Base: 공공기관 응답자 (n=260), 단위: %]'. 표 주석: '* 응답기관 수 : 설문조사에 응답한 공공기관 수'. 표2-92에는 응답기관 수와 %만 인쇄(있음·없음 순). pct=[없음%, 있음%]. counts=[없음 N, 있음 N]: 있음 N은 표2-93의 응답기관 수('담당 운영 부서가 있다고 응답한 공공기관 수' 104/8/96/20/22/62, 인쇄값), 없음 N은 계산값(= 응답기관 수 − 있음 N). 주무부처: 환경부 산하 n=9 / 환경부 외 n=251. 기관유형: 공기업 n=29 / 준정부기관 n=40 / 기타공공기관 n=191.",
+      "rows": [
+        {"by": "all", "key": "all", "n": 260, "pct": [60.0, 40.0], "counts": [156, 104]},
+        {"by": "ministry", "key": "env", "n": 9, "pct": [11.1, 88.9], "counts": [1, 8]},
+        {"by": "ministry", "key": "other", "n": 251, "pct": [61.8, 38.2], "counts": [155, 96]},
+        {"by": "orgtype", "key": "public_corp", "n": 29, "pct": [31.0, 69.0], "counts": [9, 20]},
+        {"by": "orgtype", "key": "quasi", "n": 40, "pct": [45.0, 55.0], "counts": [18, 22]},
+        {"by": "orgtype", "key": "other_public", "n": 191, "pct": [67.5, 32.5], "counts": [129, 62]}
+      ]
+    },
+    {
+      "qid": "PUB_DEPT_N",
+      "label": "환경교육 담당 운영 평균 부서 수(보유 기관 기준, 개)",
+      "short": "평균 담당 부서 수",
+      "section": "조직/인력",
+      "type": "numeric",
+      "base": {"qid": "PUB_DEPT_YN", "eq": 1},
+      "baseKind": "기관",
+      "source": [{"ref": "표2-93", "pdf": 192}],
+      "notes": "표 주석: '* 응답기관 수 : 담당 운영 부서가 있다고 응답한 공공기관 수'. 그림 없음. 본문: '환경교육 담당 부서 및 인력을 보유한 104개의 공공기관은 평균 1.41개의 부서를 보유'.",
+      "rows": [
+        {"by": "all", "key": "all", "n": 104, "mean": 1.41},
+        {"by": "ministry", "key": "env", "n": 8, "mean": 3.13},
+        {"by": "ministry", "key": "other", "n": 96, "mean": 1.27},
+        {"by": "orgtype", "key": "public_corp", "n": 20, "mean": 1.95},
+        {"by": "orgtype", "key": "quasi", "n": 22, "mean": 1.14},
+        {"by": "orgtype", "key": "other_public", "n": 62, "mean": 1.34}
+      ]
+    },
+    {
+      "qid": "PUB_STAFF_TOTAL",
+      "label": "환경교육 담당 인력 총인원(명, 보유 기관 기준)",
+      "short": "담당 인력 총인원",
+      "section": "조직/인력",
+      "type": "numeric",
+      "categories": ["남", "여"],
+      "base": {"qid": "PUB_DEPT_YN", "eq": 1},
+      "baseKind": "기관",
+      "source": [{"ref": "표2-93", "pdf": 192}],
+      "notes": "표 주석: '* 응답기관 수 : 담당 운영 부서가 있다고 응답한 공공기관 수'. 인원 합계만 인쇄(평균 미인쇄). total=계, counts=[남, 여]. 본문 '총 413명(남성 230명, 여성 183명)'과 표 일치.",
+      "rows": [
+        {"by": "all", "key": "all", "n": 104, "total": 413, "counts": [230, 183]},
+        {"by": "ministry", "key": "env", "n": 8, "total": 164, "counts": [77, 87]},
+        {"by": "ministry", "key": "other", "n": 96, "total": 249, "counts": [153, 96]},
+        {"by": "orgtype", "key": "public_corp", "n": 20, "total": 98, "counts": [61, 37]},
+        {"by": "orgtype", "key": "quasi", "n": 22, "total": 86, "counts": [50, 36]},
+        {"by": "orgtype", "key": "other_public", "n": 62, "total": 229, "counts": [119, 110]}
+      ]
+    },
+    {
+      "qid": "PUB_STAFF_FULLTIME",
+      "label": "환경교육 담당 전담 인원(명, 보유 기관 기준)",
+      "short": "전담 인원",
+      "section": "조직/인력",
+      "type": "numeric",
+      "categories": ["남", "여"],
+      "base": {"qid": "PUB_DEPT_YN", "eq": 1},
+      "baseKind": "기관",
+      "source": [{"ref": "표2-93", "pdf": 192}],
+      "notes": "표 주석: '* 응답기관 수 : 담당 운영 부서가 있다고 응답한 공공기관 수'. 인원 합계만 인쇄. total=계, counts=[남, 여].",
+      "rows": [
+        {"by": "all", "key": "all", "n": 104, "total": 209, "counts": [100, 109]},
+        {"by": "ministry", "key": "env", "n": 8, "total": 112, "counts": [43, 69]},
+        {"by": "ministry", "key": "other", "n": 96, "total": 97, "counts": [57, 40]},
+        {"by": "orgtype", "key": "public_corp", "n": 20, "total": 51, "counts": [30, 21]},
+        {"by": "orgtype", "key": "quasi", "n": 22, "total": 42, "counts": [20, 22]},
+        {"by": "orgtype", "key": "other_public", "n": 62, "total": 116, "counts": [50, 66]}
+      ]
+    },
+    {
+      "qid": "PUB_STAFF_PARTTIME",
+      "label": "환경교육 담당 겸임 인원(명, 보유 기관 기준)",
+      "short": "겸임 인원",
+      "section": "조직/인력",
+      "type": "numeric",
+      "categories": ["남", "여"],
+      "base": {"qid": "PUB_DEPT_YN", "eq": 1},
+      "baseKind": "기관",
+      "source": [{"ref": "표2-93", "pdf": 192}],
+      "notes": "표 주석: '* 응답기관 수 : 담당 운영 부서가 있다고 응답한 공공기관 수'. 인원 합계만 인쇄. total=계, counts=[남, 여].",
+      "rows": [
+        {"by": "all", "key": "all", "n": 104, "total": 204, "counts": [130, 74]},
+        {"by": "ministry", "key": "env", "n": 8, "total": 52, "counts": [34, 18]},
+        {"by": "ministry", "key": "other", "n": 96, "total": 152, "counts": [96, 56]},
+        {"by": "orgtype", "key": "public_corp", "n": 20, "total": 47, "counts": [31, 16]},
+        {"by": "orgtype", "key": "quasi", "n": 22, "total": 44, "counts": [30, 14]},
+        {"by": "orgtype", "key": "other_public", "n": 62, "total": 113, "counts": [69, 44]}
+      ]
+    },
+    {
+      "qid": "PUB_PROGRAM_YN",
+      "label": "자체 환경교육 사업 여부",
+      "short": "자체 사업 여부",
+      "section": "사업/예산",
+      "indicator": "program",
+      "type": "binary",
+      "categories": ["없음", "있음"],
+      "positive": [1],
+      "baseKind": "기관",
+      "source": [{"ref": "그림2-61", "pdf": 193}, {"ref": "표2-94", "pdf": 193}, {"ref": "표2-95", "pdf": 194}],
+      "notes": "그림 Base: '[Base: 공공기관 응답자 (n=260), 단위: %]'. 표 주석: '* 응답기관 수 : 설문조사에 응답한 공공기관 수'. 표2-94에는 응답기관 수와 %만 인쇄(있음·없음 순). pct=[없음%, 있음%]. counts=[없음 N, 있음 N]는 인쇄되지 않은 계산값: 있음 N = 응답기관 수 × 있음%(260×16.2%=42.1→42, 9×77.8%=7.0→7, 251×13.9%=34.9→35, 29×37.9%=11.0→11, 40×27.5%=11, 191×10.5%=20.1→20), 없음 N = 응답기관 수 − 있음 N. 기관유형별 있음 N은 표2-95(사업 목록)의 기관 행 수(공기업 11·준정부기관 11·기타공공기관 20, 합 42)와 일치.",
+      "rows": [
+        {"by": "all", "key": "all", "n": 260, "pct": [83.8, 16.2], "counts": [218, 42]},
+        {"by": "ministry", "key": "env", "n": 9, "pct": [22.2, 77.8], "counts": [2, 7]},
+        {"by": "ministry", "key": "other", "n": 251, "pct": [86.1, 13.9], "counts": [216, 35]},
+        {"by": "orgtype", "key": "public_corp", "n": 29, "pct": [62.1, 37.9], "counts": [18, 11]},
+        {"by": "orgtype", "key": "quasi", "n": 40, "pct": [72.5, 27.5], "counts": [29, 11]},
+        {"by": "orgtype", "key": "other_public", "n": 191, "pct": [89.5, 10.5], "counts": [171, 20]}
+      ]
+    },
+    {
+      "qid": "PUB_PROGRAM_N",
+      "label": "평균 자체 환경교육 사업 수(운영 기관 기준, 개)",
+      "short": "평균 사업 수",
+      "section": "사업/예산",
+      "type": "numeric",
+      "base": {"qid": "PUB_PROGRAM_YN", "eq": 1},
+      "baseKind": "기관",
+      "source": [{"ref": "표2-94", "pdf": 193}, {"ref": "표2-95", "pdf": 194}],
+      "notes": "표2-94 주석: '* 응답기관 수 : 설문조사에 응답한 공공기관 수'(260). 표2-95 주석: '* 사업 정보 : 자체 환경교육 사업이 있다고 응답한 공공기관에서 작성한 사업 정보'. mean=표2-94 '평균 사업 수' 인쇄값. total 89개는 표2-95(사업 목록) 전체 행의 자체 환경교육 사업 수. 분모는 사업 보유 기관 수로 확인됨: 89÷42=2.12, 표2-95 기관유형별 사업 수 합(계산) 공기업 16÷11=1.45, 준정부기관 12÷11=1.09, 기타공공기관 61÷20=3.05. n(사업 보유 기관 수)은 인쇄되지 않은 계산값(PUB_PROGRAM_YN의 있음 N과 동일: 응답기관 수 × 있음%, 기관유형별은 표2-95 기관 행 수와 일치).",
+      "rows": [
+        {"by": "all", "key": "all", "n": 42, "mean": 2.12, "total": 89},
+        {"by": "ministry", "key": "env", "n": 7, "mean": 6.43},
+        {"by": "ministry", "key": "other", "n": 35, "mean": 1.26},
+        {"by": "orgtype", "key": "public_corp", "n": 11, "mean": 1.45},
+        {"by": "orgtype", "key": "quasi", "n": 11, "mean": 1.09},
+        {"by": "orgtype", "key": "other_public", "n": 20, "mean": 3.05}
+      ]
+    },
+    {
+      "qid": "PUB_BUDGET",
+      "label": "자체 환경교육 사업 평균 예산(백만 원)",
+      "short": "평균 예산",
+      "section": "사업/예산",
+      "type": "numeric",
+      "baseKind": "기관",
+      "source": [{"ref": "표2-94", "pdf": 193}, {"ref": "표2-95", "pdf": 194}],
+      "notes": "표2-94 주석: '* 응답기관 수 : 설문조사에 응답한 공공기관 수'. mean=표2-94 '평균 예산' 인쇄값(소수 2자리, 백만 원). 본문: '평균 예산은 약 1.2억'. 산출 기준 미상: 무엇으로 나눈 평균인지 표·본문에 설명 없음. n은 같은 표의 응답기관 수(260/9/251/29/40/191)를 그대로 옮긴 것이며 분모로 확정된 값이 아님. 표 내부에서는 응답기관 수 가중평균이 전체와 맞음((9×2,875.89+251×22.99)÷260=121.74, (29×153.31+40×38.13+191×134.47)÷260=121.75) → 사업 없는 기관을 포함한 응답기관 1곳당 평균으로 보이나, 그렇게 역산한 총액(121.75×260≈31,655)은 표2-95 전체 사업 예산 합계 36,350과 맞지 않음(36,350÷260=139.81, ÷사업 보유 42기관=865.48, ÷사업 89건=408.43 어느 것도 121.75 아님). total=표2-95 전체 행 사업 예산(백만 원) 인쇄값. 2025 전사본은 사업 1건당 평균(총예산÷사업 수)이라 정의가 다를 수 있음 — 그대로 비교 금지.",
+      "rows": [
+        {"by": "all", "key": "all", "n": 260, "mean": 121.75, "total": 36350},
+        {"by": "ministry", "key": "env", "n": 9, "mean": 2875.89},
+        {"by": "ministry", "key": "other", "n": 251, "mean": 22.99},
+        {"by": "orgtype", "key": "public_corp", "n": 29, "mean": 153.31},
+        {"by": "orgtype", "key": "quasi", "n": 40, "mean": 38.13},
+        {"by": "orgtype", "key": "other_public", "n": 191, "mean": 134.47}
+      ]
+    },
+    {
+      "qid": "PUB_MATERIAL_YN",
+      "label": "자체 개발 교보재 여부",
+      "short": "자체 교보재 여부",
+      "section": "교보재",
+      "indicator": "material",
+      "type": "binary",
+      "categories": ["없음", "있음"],
+      "positive": [1],
+      "baseKind": "기관",
+      "source": [{"ref": "그림2-62", "pdf": 197}, {"ref": "표2-96", "pdf": 197}, {"ref": "표2-97", "pdf": 198}],
+      "notes": "그림 Base: '[Base: 공공기관 응답자 (n=260), 단위: %]'. 표 주석: '* 응답기관 수 : 설문조사에 응답한 공공기관 수'. 표2-96에는 응답기관 수와 %만 인쇄(있음·없음 순). pct=[없음%, 있음%]. counts=[없음 N, 있음 N]는 인쇄되지 않은 계산값: 있음 N = 응답기관 수 × 있음%(260×6.5%=16.9→17, 9×88.9%=8.0→8, 251×3.6%=9.0→9, 29×10.3%=3.0→3, 40×7.5%=3, 191×5.8%=11.1→11), 없음 N = 응답기관 수 − 있음 N. 기관유형별 있음 N은 표2-97(교보재 목록)의 기관 행 수(공기업 3·준정부기관 3·기타공공기관 11, 합 17)와 일치.",
+      "rows": [
+        {"by": "all", "key": "all", "n": 260, "pct": [93.5, 6.5], "counts": [243, 17]},
+        {"by": "ministry", "key": "env", "n": 9, "pct": [11.1, 88.9], "counts": [1, 8]},
+        {"by": "ministry", "key": "other", "n": 251, "pct": [96.4, 3.6], "counts": [242, 9]},
+        {"by": "orgtype", "key": "public_corp", "n": 29, "pct": [89.7, 10.3], "counts": [26, 3]},
+        {"by": "orgtype", "key": "quasi", "n": 40, "pct": [92.5, 7.5], "counts": [37, 3]},
+        {"by": "orgtype", "key": "other_public", "n": 191, "pct": [94.2, 5.8], "counts": [180, 11]}
+      ]
+    },
+    {
+      "qid": "PUB_MATERIAL_N",
+      "label": "자체 개발 교보재 수(개, 보유 기관 기준)",
+      "short": "자체 교보재 수",
+      "section": "교보재",
+      "type": "numeric",
+      "categories": ["교재", "교구"],
+      "base": {"qid": "PUB_MATERIAL_YN", "eq": 1},
+      "baseKind": "기관",
+      "source": [{"ref": "표2-96", "pdf": 197}, {"ref": "표2-97", "pdf": 198}],
+      "notes": "표2-96 주석: '* 응답기관 수 : 설문조사에 응답한 공공기관 수'(260). 표2-97 주석: '* 교보재 정보 : 자체 개발 교보재가 있다고 응답한 공공기관에서 작성한 교보재 정보'. 교보재 개수 합계만 인쇄(평균 미인쇄). total=계, counts=[교재 수, 교구 수]. 표2-97(목록) 전체 행도 53(교재 42, 교구 11)로 일치. n(교보재 보유 기관 수)은 인쇄되지 않은 계산값(PUB_MATERIAL_YN의 있음 N과 동일: 응답기관 수 × 있음%, 기관유형별은 표2-97 기관 행 수와 일치).",
+      "rows": [
+        {"by": "all", "key": "all", "n": 17, "total": 53, "counts": [42, 11]},
+        {"by": "ministry", "key": "env", "n": 8, "total": 30, "counts": [20, 10]},
+        {"by": "ministry", "key": "other", "n": 9, "total": 23, "counts": [22, 1]},
+        {"by": "orgtype", "key": "public_corp", "n": 3, "total": 11, "counts": [9, 2]},
+        {"by": "orgtype", "key": "quasi", "n": 3, "total": 3, "counts": [2, 1]},
+        {"by": "orgtype", "key": "other_public", "n": 11, "total": 39, "counts": [31, 8]}
+      ]
+    },
+    {
+      "qid": "PUB_MATERIAL_TARGET",
+      "label": "자체 개발 교보재 대상(중복응답, 교보재 건 기준)",
+      "short": "교보재 대상",
+      "section": "교보재",
+      "type": "multi",
+      "categories": ["유아(만6세 이하)", "초등(만7~12세)", "청소년(중등 만13~15세)", "청소년(고등 만16~18세)", "청년(만19~34세)", "중장년(만35~64세)", "노년(만65세 이상)"],
+      "base": {"qid": "PUB_MATERIAL_YN", "eq": 1},
+      "baseKind": "교보재 건",
+      "source": [{"ref": "그림2-63", "pdf": 200}, {"ref": "표2-98", "pdf": 200}],
+      "notes": "그림 Base: '[Base: 전체 교보재 수 (n=53), 단위: %]'. 표 주석: '* 총 교보재 수 : 자체 개발한 교보재가 있다고 응답한 공공기관에서 개발한 교보재 수', '* 2개까지 복수 응답 허용'. n=총 교보재 수. %만 인쇄(건수 미인쇄). 표의 '-'는 null. 보기는 표2-98 머리글 표기 그대로(2025 전사본과 같은 7개 연령대, 띄어쓰기·쉼표만 다름). 그림2-63의 가로축 넷째 보기는 '청소년(고등 만19~34세)'로 인쇄되어 있으나 표는 '만16~18세'(그림 오기), 그림 수치는 표 전체 행과 일치.",
+      "rows": [
+        {"by": "all", "key": "all", "n": 53, "pct": [24.5, 24.5, 17.0, 11.3, 37.7, 39.6, 1.9]},
+        {"by": "ministry", "key": "env", "n": 30, "pct": [40.0, 40.0, 26.7, 16.7, null, null, 3.3]},
+        {"by": "ministry", "key": "other", "n": 23, "pct": [4.3, 4.3, 4.3, 4.3, 87.0, 91.3, null]},
+        {"by": "orgtype", "key": "public_corp", "n": 11, "pct": [null, 27.3, 27.3, 9.1, 54.5, 54.5, null]},
+        {"by": "orgtype", "key": "quasi", "n": 3, "pct": [33.3, 33.3, null, null, 33.3, 66.7, null]},
+        {"by": "orgtype", "key": "other_public", "n": 39, "pct": [30.8, 23.1, 15.4, 12.8, 33.3, 33.3, 2.6]}
+      ]
+    },
+    {
+      "qid": "PUB_MATERIAL_TOPIC",
+      "label": "자체 개발 교보재 주제(중복응답, 교보재 건 기준)",
+      "short": "교보재 주제",
+      "section": "교보재",
+      "type": "multi",
+      "categories": ["기후변화 및 탄소중립", "대기", "에너지", "소음", "폐기물 및 자원순환", "환경보건", "물", "토양", "생태계", "지속가능발전", "생명윤리", "기타"],
+      "base": {"qid": "PUB_MATERIAL_YN", "eq": 1},
+      "baseKind": "교보재 건",
+      "source": [{"ref": "그림2-64", "pdf": 201}, {"ref": "표2-99", "pdf": 201}],
+      "notes": "그림 Base: '[Base: 전체 교보재 수 (n=53), 단위: %]'. 표 주석: '* 총 교보재 수 : 자체 개발한 교보재가 있다고 응답한 공공기관에서 개발한 교보재 수', '* 3개까지 복수 응답 허용'. n=총 교보재 수. %만 인쇄(건수 미인쇄). 표의 '-'는 null('소음'은 모든 행이 '-').",
+      "rows": [
+        {"by": "all", "key": "all", "n": 53, "pct": [34.0, 1.9, 20.8, null, 26.4, 9.4, 17.0, 1.9, 28.3, 7.5, 1.9, 7.5]},
+        {"by": "ministry", "key": "env", "n": 30, "pct": [36.7, null, 30.0, null, 36.7, null, 23.3, null, 33.3, 13.3, 3.3, null]},
+        {"by": "ministry", "key": "other", "n": 23, "pct": [30.4, 4.3, 8.7, null, 13.0, 21.7, 8.7, 4.3, 21.7, null, null, 17.4]},
+        {"by": "orgtype", "key": "public_corp", "n": 11, "pct": [18.2, 9.1, 27.3, null, 18.2, 27.3, 45.5, null, 27.3, null, null, null]},
+        {"by": "orgtype", "key": "quasi", "n": 3, "pct": [33.3, null, 33.3, null, null, null, null, null, 33.3, null, 33.3, 33.3]},
+        {"by": "orgtype", "key": "other_public", "n": 39, "pct": [38.5, null, 17.9, null, 30.8, 5.1, 10.3, 2.6, 28.2, 10.3, null, 7.7]}
+      ]
+    },
+    {
+      "qid": "PUB_FACILITY_YN",
+      "label": "환경교육 진행 시설 보유 여부",
+      "short": "시설 보유 여부",
+      "section": "시설",
+      "indicator": "facility",
+      "type": "binary",
+      "categories": ["보유하고 있지 않음", "보유하고 있음"],
+      "positive": [1],
+      "baseKind": "기관",
+      "source": [{"ref": "그림2-65", "pdf": 202}, {"ref": "표2-100", "pdf": 202}, {"ref": "표2-101", "pdf": 203}],
+      "notes": "그림 Base: '[Base: 공공기관 응답자 (n=260), 단위: %]'. 표 주석: '* 응답기관 수 : 설문조사에 응답한 공공기관 수'. 표2-100에는 응답기관 수와 %만 인쇄(보유하고 있음·보유하고 있지 않음 순). pct=[보유하고 있지 않음%, 보유하고 있음%]. counts=[미보유 N, 보유 N]는 인쇄되지 않은 계산값: 보유 N = 응답기관 수 × 보유%(260×11.9%=30.9→31, 9×77.8%=7.0→7, 251×9.6%=24.1→24, 29×10.3%=3.0→3, 40×20.0%=8, 191×10.5%=20.1→20), 미보유 N = 응답기관 수 − 보유 N. 기관유형별 보유 N은 표2-101(시설 목록)의 기관 행 수(공기업 3·준정부기관 8·기타공공기관 20, 합 31)와 일치.",
+      "rows": [
+        {"by": "all", "key": "all", "n": 260, "pct": [88.1, 11.9], "counts": [229, 31]},
+        {"by": "ministry", "key": "env", "n": 9, "pct": [22.2, 77.8], "counts": [2, 7]},
+        {"by": "ministry", "key": "other", "n": 251, "pct": [90.4, 9.6], "counts": [227, 24]},
+        {"by": "orgtype", "key": "public_corp", "n": 29, "pct": [89.7, 10.3], "counts": [26, 3]},
+        {"by": "orgtype", "key": "quasi", "n": 40, "pct": [80.0, 20.0], "counts": [32, 8]},
+        {"by": "orgtype", "key": "other_public", "n": 191, "pct": [89.5, 10.5], "counts": [171, 20]}
+      ]
+    },
+    {
+      "qid": "PUB_FACILITY_N",
+      "label": "환경교육 시설 수(개, 보유 기관 기준, 운영 방식별)",
+      "short": "환경교육 시설 수",
+      "section": "시설",
+      "type": "numeric",
+      "categories": ["직접운영", "수탁운영", "위탁운영", "기타"],
+      "base": {"qid": "PUB_FACILITY_YN", "eq": 1},
+      "baseKind": "기관",
+      "source": [{"ref": "표2-100", "pdf": 202}, {"ref": "표2-101", "pdf": 203}],
+      "notes": "표2-100 주석: '* 응답기관 수 : 설문조사에 응답한 공공기관 수'(260). 표2-101 주석: '* 시설 정보 : 환경교육 진행 시설이 있다고 응답한 공공기관에서 작성한 시설 정보'. 시설 수 합계만 인쇄(평균 미인쇄). total=계, counts=[직접, 수탁, 위탁, 기타]; '-'는 null. 표2-101(목록) 전체 행도 53(46/5/1/1)으로 일치. [표 내부 불일치] 환경부 외 행은 계 35·직접운영 35·수탁운영 1·기타 1로 인쇄되어 운영 방식 합(37)이 계(35)와 맞지 않고, 직접운영도 산하 13+외 35=48로 전체 46과 맞지 않음(직접운영 33이어야 양쪽이 맞음). 인쇄값 35를 그대로 옮김. n(시설 보유 기관 수)은 인쇄되지 않은 계산값(PUB_FACILITY_YN의 보유 N과 동일: 응답기관 수 × 보유%, 기관유형별은 표2-101 기관 행 수와 일치).",
+      "rows": [
+        {"by": "all", "key": "all", "n": 31, "total": 53, "counts": [46, 5, 1, 1]},
+        {"by": "ministry", "key": "env", "n": 7, "total": 18, "counts": [13, 4, 1, null]},
+        {"by": "ministry", "key": "other", "n": 24, "total": 35, "counts": [35, 1, null, 1]},
+        {"by": "orgtype", "key": "public_corp", "n": 3, "total": 4, "counts": [3, 1, null, null]},
+        {"by": "orgtype", "key": "quasi", "n": 8, "total": 12, "counts": [11, null, null, 1]},
+        {"by": "orgtype", "key": "other_public", "n": 20, "total": 37, "counts": [32, 4, 1, null]}
+      ]
+    },
+    {
+      "qid": "PUB_TRAINING_MANDATE_YN",
+      "label": "소속 직원 대상 환경 주제 연수 의무교육 시간 지정 여부",
+      "short": "연수 의무시간 지정",
+      "section": "연수",
+      "type": "binary",
+      "categories": ["아니오", "예"],
+      "positive": [1],
+      "baseKind": "기관",
+      "source": [{"ref": "그림2-66", "pdf": 205}, {"ref": "표2-102", "pdf": 205}],
+      "notes": "2025 전사본에 없는 문항(새 qid). 그림 Base: '[Base: 공공기관 응답자 (n=260), 단위: %]'. 표 주석: '* 응답기관 수 : 설문조사에 응답한 공공기관 수'. 표에는 응답기관 수와 %만 인쇄(예·아니오 순). pct=[아니오%, 예%]. counts=[아니오 N, 예 N]는 인쇄되지 않은 계산값(다른 표로 대조할 인쇄값 없음): 예 N = 응답기관 수 × 예%(260×13.1%=34.1→34, 9×33.3%=3.0→3, 251×12.4%=31.1→31, 29×27.6%=8.0→8, 40×10.0%=4, 191×11.5%=22.0→22), 아니오 N = 응답기관 수 − 예 N.",
+      "rows": [
+        {"by": "all", "key": "all", "n": 260, "pct": [86.9, 13.1], "counts": [226, 34]},
+        {"by": "ministry", "key": "env", "n": 9, "pct": [66.7, 33.3], "counts": [6, 3]},
+        {"by": "ministry", "key": "other", "n": 251, "pct": [87.6, 12.4], "counts": [220, 31]},
+        {"by": "orgtype", "key": "public_corp", "n": 29, "pct": [72.4, 27.6], "counts": [21, 8]},
+        {"by": "orgtype", "key": "quasi", "n": 40, "pct": [90.0, 10.0], "counts": [36, 4]},
+        {"by": "orgtype", "key": "other_public", "n": 191, "pct": [88.5, 11.5], "counts": [169, 22]}
+      ]
+    },
+    {
+      "qid": "PUB_TRAINING_YN",
+      "label": "소속 직원 대상 환경 주제 연수 실시 여부",
+      "short": "직원 환경 연수 실시",
+      "section": "연수",
+      "indicator": "training",
+      "type": "binary",
+      "categories": ["실시하지 않았음", "실시하였음"],
+      "positive": [1],
+      "baseKind": "기관",
+      "source": [{"ref": "그림2-67", "pdf": 206}, {"ref": "표2-103", "pdf": 206}, {"ref": "표2-104", "pdf": 207}],
+      "notes": "그림 Base: '[Base: 공공기관 응답자 (n=260), 단위: %]'. 표 주석: '.* 응답기관 수 : 설문조사에 응답한 공공기관 수'. 표2-103 제목은 '소속 직원 대상 자체 환경 주제 연수 실시 여부 및 평균 연수 개수'(소제목·그림 제목에는 '자체' 없음). 표2-103에는 응답기관 수와 %만 인쇄(실시하였음·실시하지 않았음 순). pct=[실시하지 않았음%, 실시하였음%]. counts=[미실시 N, 실시 N]: 실시 N은 표2-104의 응답기관 수('연수를 실시하였다고 응답한 공공기관 수' 59/5/54/12/11/36, 인쇄값), 미실시 N은 계산값(= 응답기관 수 − 실시 N).",
+      "rows": [
+        {"by": "all", "key": "all", "n": 260, "pct": [77.3, 22.7], "counts": [201, 59]},
+        {"by": "ministry", "key": "env", "n": 9, "pct": [44.4, 55.6], "counts": [4, 5]},
+        {"by": "ministry", "key": "other", "n": 251, "pct": [78.5, 21.5], "counts": [197, 54]},
+        {"by": "orgtype", "key": "public_corp", "n": 29, "pct": [58.6, 41.4], "counts": [17, 12]},
+        {"by": "orgtype", "key": "quasi", "n": 40, "pct": [72.5, 27.5], "counts": [29, 11]},
+        {"by": "orgtype", "key": "other_public", "n": 191, "pct": [81.2, 18.8], "counts": [155, 36]}
+      ]
+    },
+    {
+      "qid": "PUB_TRAINING_N",
+      "label": "평균 환경 주제 연수 개수(계, 실시 기관 기준, 개)",
+      "short": "평균 연수 개수",
+      "section": "연수",
+      "type": "numeric",
+      "base": {"qid": "PUB_TRAINING_YN", "eq": 1},
+      "baseKind": "기관",
+      "source": [{"ref": "표2-103", "pdf": 206}, {"ref": "표2-104", "pdf": 207}],
+      "notes": "mean=표2-103 '연수 개수 - 계' 인쇄값(소수 2자리). 표2-103 주석: '.* 응답기관 수 : 설문조사에 응답한 공공기관 수'(260). n=표2-104 응답기관 수('연수를 실시하였다고 응답한 공공기관 수'), total=표2-104 '총 환경 주제 연수 개수'(인쇄값). 본문: '평균 1.93개의 연수를 진행'. [주의·표 내부 불일치] 전체 1.93은 114÷59(실시 기관당 평균)와 맞지만, 하위 집단 값은 그 집단의 총 연수 개수를 전체 실시 기관 수 59로 나눈 값으로 보임(8÷59=0.14, 106÷59=1.80, 32÷59=0.54, 38÷59=0.64, 44÷59=0.75) → 집단별 기관당 평균이 아니며 전체(1.93)보다 모두 작음. 집단별 실시 기관당 평균은 total÷n으로 따로 계산해야 함(8÷5=1.60, 106÷54=1.96, 32÷12=2.67, 38÷11=3.45, 44÷36=1.22; 이 값들은 인쇄값이 아니므로 rows에 넣지 않음). 방법별은 PUB_TRAINING_N_INPERSON/REMOTE/BLENDED 참조.",
+      "rows": [
+        {"by": "all", "key": "all", "n": 59, "mean": 1.93, "total": 114},
+        {"by": "ministry", "key": "env", "n": 5, "mean": 0.14, "total": 8},
+        {"by": "ministry", "key": "other", "n": 54, "mean": 1.80, "total": 106},
+        {"by": "orgtype", "key": "public_corp", "n": 12, "mean": 0.54, "total": 32},
+        {"by": "orgtype", "key": "quasi", "n": 11, "mean": 0.64, "total": 38},
+        {"by": "orgtype", "key": "other_public", "n": 36, "mean": 0.75, "total": 44}
+      ]
+    },
+    {
+      "qid": "PUB_TRAINING_N_INPERSON",
+      "label": "평균 환경 주제 연수 개수 - 집합교육(실시 기관 기준, 개)",
+      "short": "평균 연수 개수(집합)",
+      "section": "연수",
+      "type": "numeric",
+      "base": {"qid": "PUB_TRAINING_YN", "eq": 1},
+      "baseKind": "기관",
+      "source": [{"ref": "표2-103", "pdf": 206}, {"ref": "표2-104", "pdf": 207}],
+      "notes": "mean=표2-103 '연수 개수 - 집합교육' 인쇄값. n=표2-104 응답기관 수(연수 실시 기관). [주의] PUB_TRAINING_N과 같이 하위 집단 값은 전체 실시 기관 수 59로 나눈 값으로 보임(전체 0.93≈55÷59; 산하 0.10≈6÷59 — 건수 55·6은 표2-104의 %×총 연수 개수로 계산한 값). 집단별 기관당 평균이 아님.",
+      "rows": [
+        {"by": "all", "key": "all", "n": 59, "mean": 0.93},
+        {"by": "ministry", "key": "env", "n": 5, "mean": 0.10},
+        {"by": "ministry", "key": "other", "n": 54, "mean": 0.83},
+        {"by": "orgtype", "key": "public_corp", "n": 12, "mean": 0.51},
+        {"by": "orgtype", "key": "quasi", "n": 11, "mean": 0.12},
+        {"by": "orgtype", "key": "other_public", "n": 36, "mean": 0.31}
+      ]
+    },
+    {
+      "qid": "PUB_TRAINING_N_REMOTE",
+      "label": "평균 환경 주제 연수 개수 - 원격교육(실시 기관 기준, 개)",
+      "short": "평균 연수 개수(원격)",
+      "section": "연수",
+      "type": "numeric",
+      "base": {"qid": "PUB_TRAINING_YN", "eq": 1},
+      "baseKind": "기관",
+      "source": [{"ref": "표2-103", "pdf": 206}, {"ref": "표2-104", "pdf": 207}],
+      "notes": "mean=표2-103 '연수 개수 - 원격교육' 인쇄값. n=표2-104 응답기관 수(연수 실시 기관). [주의] PUB_TRAINING_N과 같이 하위 집단 값은 전체 실시 기관 수 59로 나눈 값으로 보임(집단별 기관당 평균이 아님).",
+      "rows": [
+        {"by": "all", "key": "all", "n": 59, "mean": 0.80},
+        {"by": "ministry", "key": "env", "n": 5, "mean": 0.02},
+        {"by": "ministry", "key": "other", "n": 54, "mean": 0.78},
+        {"by": "orgtype", "key": "public_corp", "n": 12, "mean": 0.03},
+        {"by": "orgtype", "key": "quasi", "n": 11, "mean": 0.47},
+        {"by": "orgtype", "key": "other_public", "n": 36, "mean": 0.29}
+      ]
+    },
+    {
+      "qid": "PUB_TRAINING_N_BLENDED",
+      "label": "평균 환경 주제 연수 개수 - 혼합교육(실시 기관 기준, 개)",
+      "short": "평균 연수 개수(혼합)",
+      "section": "연수",
+      "type": "numeric",
+      "base": {"qid": "PUB_TRAINING_YN", "eq": 1},
+      "baseKind": "기관",
+      "source": [{"ref": "표2-103", "pdf": 206}, {"ref": "표2-104", "pdf": 207}],
+      "notes": "mean=표2-103 '연수 개수 - 혼합교육' 인쇄값. n=표2-104 응답기관 수(연수 실시 기관). 공기업은 '-'로 인쇄 → null. [주의] PUB_TRAINING_N과 같이 하위 집단 값은 전체 실시 기관 수 59로 나눈 값으로 보임(집단별 기관당 평균이 아님).",
+      "rows": [
+        {"by": "all", "key": "all", "n": 59, "mean": 0.20},
+        {"by": "ministry", "key": "env", "n": 5, "mean": 0.02},
+        {"by": "ministry", "key": "other", "n": 54, "mean": 0.19},
+        {"by": "orgtype", "key": "public_corp", "n": 12, "mean": null},
+        {"by": "orgtype", "key": "quasi", "n": 11, "mean": 0.05},
+        {"by": "orgtype", "key": "other_public", "n": 36, "mean": 0.15}
+      ]
+    },
+    {
+      "qid": "PUB_TRAINING_METHOD",
+      "label": "소속 직원 대상 실시 자체 환경 주제 연수 방법(연수 건 기준)",
+      "short": "연수 방법",
+      "section": "연수",
+      "type": "events",
+      "categories": ["집합교육", "원격교육", "혼합교육"],
+      "base": {"qid": "PUB_TRAINING_YN", "eq": 1},
+      "baseKind": "연수 건",
+      "source": [{"ref": "표2-104", "pdf": 207}, {"ref": "표2-103", "pdf": 206}],
+      "notes": "표 주석: '.* 응답기관 수 : 연수를 실시하였다고 응답한 공공기관 수', '* 총 환경 주제 연수 개수 : 연수를 실시하였다고 응답한 공공기관의 총 환경교육 연수 개수', '* 연수 방법 : 연수를 실시하였다고 응답한 공공기관에서 작성한 연수 정보'. 그림 없음. n=연수 실시 기관 수, events=총 연수 개수, pct는 연수 건 기준(%만 인쇄, 건수 미인쇄). '-'는 null. mean은 전체 행에만 넣음(표2-103 '계' 1.93 = 114÷59); 하위 집단의 표2-103 인쇄값은 기관당 평균이 아니어서(PUB_TRAINING_N notes 참조) 여기에는 넣지 않음. 전체 48.2+41.2+10.5=99.9, 공기업 93.8+6.3=100.1은 인쇄값 그대로. 본문은 '집합교육이 48.2회로 가장 많았고, 원격교육 또한 41.2회'로 서술하나 표의 단위는 %(본문 단위 오기).",
+      "rows": [
+        {"by": "all", "key": "all", "n": 59, "events": 114, "mean": 1.93, "pct": [48.2, 41.2, 10.5]},
+        {"by": "ministry", "key": "env", "n": 5, "events": 8, "pct": [75.0, 12.5, 12.5]},
+        {"by": "ministry", "key": "other", "n": 54, "events": 106, "pct": [46.2, 43.4, 10.4]},
+        {"by": "orgtype", "key": "public_corp", "n": 12, "events": 32, "pct": [93.8, 6.3, null]},
+        {"by": "orgtype", "key": "quasi", "n": 11, "events": 38, "pct": [18.4, 73.7, 7.9]},
+        {"by": "orgtype", "key": "other_public", "n": 36, "events": 44, "pct": [40.9, 38.6, 20.5]}
+      ]
+    },
+    {
+      "qid": "PUB_TRAINING_TOPIC",
+      "label": "소속 직원 대상 실시 자체 환경 주제 연수 주제(중복응답, 연수 건 기준)",
+      "short": "연수 주제",
+      "section": "연수",
+      "type": "multi",
+      "categories": ["기후변화 및 탄소중립", "대기", "에너지", "소음", "폐기물 및 자원순환", "환경보건", "물", "토양", "생태계", "지속가능발전", "생명윤리", "기타"],
+      "base": {"qid": "PUB_TRAINING_YN", "eq": 1},
+      "baseKind": "연수 건",
+      "source": [{"ref": "그림2-68", "pdf": 208}, {"ref": "표2-105", "pdf": 208}],
+      "notes": "그림 Base: '[Base: 전체 연수 개수 (n=114), 단위: %]'. 표 주석: '* 총 환경 주제 연수 개수 : 연수를 실시하였다고 응답한 공공기관의 총 환경교육 연수 개수', '* 3개까지 복수 응답 허용'. n=총 연수 개수. %만 인쇄(건수 미인쇄). 표의 '-'는 null('소음'은 모든 행이 '-'). 표2-105 제목은 '소속 직원 대상 실시 자체 환경 주제 연구 주제', 그림2-68 제목은 '소속 직원 대상 환경 주제 연수 의무교육 시간 지정 여부'로 인쇄되어 있으나 내용은 연수 주제(제목 오기, 소제목은 '소속 직원 대상 실시 자체 환경 주제 연수 주제').",
+      "rows": [
+        {"by": "all", "key": "all", "n": 114, "pct": [55.3, 12.3, 39.5, null, 22.8, 18.4, 7.0, 0.9, 4.4, 26.3, 0.9, 23.7]},
+        {"by": "ministry", "key": "env", "n": 8, "pct": [50.0, 12.5, 25.0, null, 12.5, 12.5, 25.0, null, 12.5, 12.5, null, null]},
+        {"by": "ministry", "key": "other", "n": 106, "pct": [55.7, 12.3, 40.6, null, 23.6, 18.9, 5.7, 0.9, 3.8, 27.4, 0.9, 25.5]},
+        {"by": "orgtype", "key": "public_corp", "n": 32, "pct": [40.6, 12.5, 31.3, null, 43.8, 37.5, 18.8, null, 9.4, 21.9, null, 46.9]},
+        {"by": "orgtype", "key": "quasi", "n": 38, "pct": [47.4, 21.1, 34.2, null, 13.2, 15.8, 2.6, 2.6, null, 15.8, 2.6, 28.9]},
+        {"by": "orgtype", "key": "other_public", "n": 44, "pct": [72.7, 4.5, 50.0, null, 15.9, 6.8, 2.3, null, 4.5, 38.6, null, 2.3]}
+      ]
+    },
+    {
+      "qid": "PUB_COUNCIL_YN",
+      "label": "환경교육 관련 공식적 회의체 구성 여부",
+      "short": "공식 회의체 구성",
+      "section": "거버넌스",
+      "indicator": "council",
+      "type": "binary",
+      "categories": ["없음", "있음"],
+      "positive": [1],
+      "baseKind": "기관",
+      "source": [{"ref": "그림2-69", "pdf": 209}, {"ref": "표2-106", "pdf": 209}, {"ref": "표2-107", "pdf": 210}],
+      "notes": "그림 Base: '[Base: 공공기관 응답자 (n=260), 단위: %]'. 표 주석: '* 응답기관 수 : 설문조사에 응답한 공공기관 수'. 보기는 표2-106 '회의체 여부'의 있음/없음(2025 전사본은 구성함/구성하지 않음). 표2-106에는 응답기관 수와 %만 인쇄(있음·없음 순). pct=[없음%, 있음%]. counts=[없음 N, 있음 N]는 인쇄되지 않은 계산값: 있음 N = 응답기관 수 × 있음%(260×18.5%=48.1→48, 9×44.4%=4.0→4, 251×17.5%=43.9→44, 29×24.1%=7.0→7, 40×30.0%=12, 191×15.2%=29.0→29), 없음 N = 응답기관 수 − 있음 N. 기관유형별 있음 N은 표2-107(회의체 목록)의 기관 행 수(공기업 7·준정부기관 12·기타공공기관 29, 합 48)와 일치.",
+      "rows": [
+        {"by": "all", "key": "all", "n": 260, "pct": [81.5, 18.5], "counts": [212, 48]},
+        {"by": "ministry", "key": "env", "n": 9, "pct": [55.6, 44.4], "counts": [5, 4]},
+        {"by": "ministry", "key": "other", "n": 251, "pct": [82.5, 17.5], "counts": [207, 44]},
+        {"by": "orgtype", "key": "public_corp", "n": 29, "pct": [75.9, 24.1], "counts": [22, 7]},
+        {"by": "orgtype", "key": "quasi", "n": 40, "pct": [70.0, 30.0], "counts": [28, 12]},
+        {"by": "orgtype", "key": "other_public", "n": 191, "pct": [84.8, 15.2], "counts": [162, 29]}
+      ]
+    },
+    {
+      "qid": "PUB_COUNCIL_N",
+      "label": "구성한 평균 회의체 수(구성 기관 기준, 개)",
+      "short": "평균 회의체 수",
+      "section": "거버넌스",
+      "type": "numeric",
+      "base": {"qid": "PUB_COUNCIL_YN", "eq": 1},
+      "baseKind": "기관",
+      "source": [{"ref": "표2-106", "pdf": 209}, {"ref": "표2-107", "pdf": 210}],
+      "notes": "표2-106 주석: '* 응답기관 수 : 설문조사에 응답한 공공기관 수'(260). 표2-107 주석: '* 환경교육 관련 회의체 수 : 공식적 회의체가 있다고 응답한 공공기관의 회의체 수', '* 회의체 구성 정보 : 공식적 회의체를 구성했다고 응답한 공공기관에서 작성한 회의체 구성 정보'. mean=표2-106 '구성한 평균 회의체 수' 인쇄값. total 59개는 표2-107(회의체 목록) 전체 행의 환경교육 관련 회의체 수. 표2-107 전체 행의 2023년 회의 수 합계는 127회. 분모는 회의체 구성 기관 수로 확인됨: 59÷48=1.23, 표2-107 기관유형별 회의체 수 합(계산) 공기업 8÷7=1.14, 준정부기관 14÷12=1.17, 기타공공기관 37÷29=1.28. n(회의체 구성 기관 수)은 인쇄되지 않은 계산값(PUB_COUNCIL_YN의 있음 N과 동일: 응답기관 수 × 있음%, 기관유형별은 표2-107 기관 행 수와 일치).",
+      "rows": [
+        {"by": "all", "key": "all", "n": 48, "mean": 1.23, "total": 59},
+        {"by": "ministry", "key": "env", "n": 4, "mean": 2.75},
+        {"by": "ministry", "key": "other", "n": 44, "mean": 1.09},
+        {"by": "orgtype", "key": "public_corp", "n": 7, "mean": 1.14},
+        {"by": "orgtype", "key": "quasi", "n": 12, "mean": 1.17},
+        {"by": "orgtype", "key": "other_public", "n": 29, "mean": 1.28}
+      ]
+    }
+  ]
+}

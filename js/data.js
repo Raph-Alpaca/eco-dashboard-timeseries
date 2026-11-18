@@ -47,6 +47,10 @@ export async function loadCube(surveyId, pop) {
   try { return await p; } catch (e) { cache.delete(key); throw e; }
 }
 
+/** 공표값 저장소(보고서 공표 수치 그대로) — 연도·기관별 파일과 연도 간 문항 대응 색인 */
+export function loadPublishedIndex() { return getJSON("published/index.json"); }
+export function loadPublished(year, pop) { return getJSON(`published/${year}/${pop}.json`); }
+
 export async function loadManifest() {
   try { return await getJSON("cubes/manifest.json"); } catch { return null; }
 }

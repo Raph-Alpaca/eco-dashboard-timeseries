@@ -268,3 +268,29 @@ dialog.modal::backdrop { background: rgba(11, 61, 56, .4); }
 }
 
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; scroll-behavior: auto !important; } }
+
+/* ── 실태조사: 보기 전환·공표값 카드(추이) ─────────── */
+.area-label { font-size: .78rem; color: var(--ink-3); margin-left: 8px; }
+.seg { display: inline-flex; border: 1px solid var(--line-2); border-radius: 999px; overflow: hidden; background: var(--surface); }
+.seg button { border: 0; background: transparent; padding: 6px 14px; font: inherit; font-size: .86rem; font-weight: 600; color: var(--ink-2); cursor: pointer; min-height: 32px; white-space: nowrap; }
+.seg button + button { border-left: 1px solid var(--line-2); }
+.seg button.active { background: var(--brand-deep); color: #fff; }
+.seg button:disabled { opacity: .45; cursor: default; }
+.panel > header .acts .seg button { min-height: 28px; padding: 4px 12px; font-size: .8rem; }
+.badge.pubval { background: var(--brand-soft); color: var(--brand-deep); border-color: #c5e0da; }
+.badge.wording { background: #fff3d6; color: #7a5200; border-color: #ecd596; }
+.panel.pub .table-wrap { max-height: 300px; }
+.panel.pub .pub-pick { padding: 0 14px 6px; font-size: .82rem; color: var(--ink-2); }
+.panel.pub .pub-pick select { font: inherit; font-size: .82rem; padding: 3px 6px; border: 1px solid var(--line-2); border-radius: 6px; background: var(--surface); max-width: 100%; }
+.panel.pub .pub-extra { padding: 0 14px; }
+.panel.pub .wording { border-left: 3px solid #e2c36b; background: #fffaf0; padding: 6px 10px; margin: 0 0 8px; font-size: .8rem; color: #4d3b10; line-height: 1.55; border-radius: 0 6px 6px 0; }
+.panel.pub .wording b { font-weight: 700; margin-right: 6px; }
+.panel.pub .wording .diff { color: #7a5200; margin-top: 2px; }
+.panel.pub .pub-notes { font-size: .76rem; color: var(--ink-3); margin: 0 0 8px; line-height: 1.5; }
+.panel.pub .pub-notes summary { cursor: pointer; color: var(--ink-2); }
+.panel.pub .pub-notes div { margin-top: 4px; }
+.trend-sum { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 6px; }
+.trend-sum .chip { cursor: default; font-size: .82rem; min-height: 0; padding: 4px 12px; }
+.trend-sum .chip.on { background: var(--brand-soft); border-color: var(--brand); color: var(--brand-ink); font-weight: 700; }
+.table-wrap.unlinked { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 6px 10px; overflow: auto; }
+@media (max-width: 640px) { .seg { width: 100%; } .seg button { flex: 1; padding: 6px 8px; } }

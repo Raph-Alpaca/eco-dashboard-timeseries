@@ -13,8 +13,8 @@ export async function render({ main, sub, app }) {
   const kpis = [
     { lbl: "학생 응답", val: fmtInt(sc.populations.student.n), unit: "명", cmp: "초 4,868 · 중 4,263 · 고 3,940 (300교)" },
     { lbl: "교원 응답", val: fmtInt(sc.populations.teacher.n), unit: "명", cmp: "일반교원 5,502 · 담당교원 306" },
-    { lbl: "실태조사 응답 기관", val: fmtInt(instTotal), unit: "곳", cmp: "9종 기관 · 유아·초중등은 표본(가중 추정)" },
-    { lbl: "기준 연도", val: "2025", unit: "", cmp: "현황조사 2025.10~11 · 실태조사 기준일 2024.12.31" },
+    { lbl: "실태조사 응답 기관 (2025)", val: fmtInt(instTotal), unit: "곳", cmp: "9종 기관 · 유아·초중등은 표본(가중 추정)" },
+    { lbl: "조사 연도", val: "2024·2025", unit: "", cmp: "현황조사 2025 · 실태조사 2024·2025(기준일은 각 전년 말)" },
     { lbl: "기후위기·환경문제가 심각하다 (학생)", val: fmt(g(S, "S01")?.positive, 1), unit: "%", cmp: `교원 <b>${fmt(g(T, "T01")?.positive, 1)}%</b>` },
     { lbl: "학교환경교육 전반적 만족도 (학생)", val: fmt(g(S, "S14_1")?.mean, 2), unit: "점/5", cmp: `교원 <b>${fmt(g(T, "T15_1")?.mean, 2)}점</b>` },
     { lbl: "향후 환경교육 확대에 동의 (학생)", val: fmt(g(S, "S16")?.positive, 1), unit: "%", cmp: `교원 <b>${fmt(g(T, "T18")?.positive, 1)}%</b>` },
@@ -36,12 +36,13 @@ export async function render({ main, sub, app }) {
         <h3>${esc(st.title)}</h3>
         <p style="color:var(--ink-2);font-size:.9rem">중앙행정기관부터 유아·초중등·대학까지 9종 기관의 환경교육 기반(법령·계획·인력·사업·시설·연수·거버넌스)을 묻는 국가승인통계입니다.</p>
         <div class="kv"><span>주관</span><b>${esc(st.publisher)}</b><span>조사 기간</span><b>${esc(st.fieldwork)}</b><span>조사 방법</span><b>${esc(st.sampling)}</b></div>
-        <div class="links"><a class="btn small" href="#status/overview">전체 개요</a><a class="btn small" href="#status/inst_school">초·중등학교</a><a class="btn small" href="#status/inst_local">기초지자체</a><a class="btn small" href="#status/inst_edu_office">시도교육청</a></div>
+        <div class="links"><a class="btn small" href="#status/overview">전체 개요(2024→2025)</a><a class="btn small" href="#status/inst_school">초·중등학교</a><a class="btn small" href="#status/inst_local">기초지자체</a><a class="btn small" href="#status/inst_edu_office">시도교육청</a></div>
       </div>
       <div class="card" style="grid-column:1/-1">
         <h3>이 대시보드로 할 수 있는 것</h3>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;font-size:.88rem;color:var(--ink-2)">
           <div><b style="color:var(--ink)">칸(패널) 바꾸기</b><br>각 패널의 ⚙ 버튼으로 문항·비교 축·차트를 바꿉니다. 구성은 브라우저에 저장됩니다.</div>
+          <div><b style="color:var(--ink)">2024→2025 추이</b><br>실태조사는 두 해의 문항이 같은 것만 이어 보여 줍니다. 값은 두 보고서의 공표값 그대로입니다.</div>
           <div><b style="color:var(--ink)">간단 분석</b><br>상단 필터로 학교급·학년·지역을 좁히고, '분석' 탭에서 두 축 교차표를 만듭니다.</div>
           <div><b style="color:var(--ink)">보고서 만들기</b><br>패널의 ＋ 버튼으로 담은 뒤 '보고서' 탭에서 메모를 적고 PDF로 저장합니다.</div>
           <div><b style="color:var(--ink)">실데이터로 교체</b><br>원자료는 화면으로 가지 않습니다. 집계 큐브만 바꾸면 같은 화면이 실데이터로 동작합니다. 이 프로토타입의 수치는 보고서 공표값에 맞춘 합성 데이터입니다(데이터 안내).</div>
