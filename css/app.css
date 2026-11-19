@@ -294,3 +294,5 @@ dialog.modal::backdrop { background: rgba(11, 61, 56, .4); }
 .trend-sum .chip.on { background: var(--brand-soft); border-color: var(--brand); color: var(--brand-ink); font-weight: 700; }
 .table-wrap.unlinked { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 6px 10px; overflow: auto; }
 @media (max-width: 640px) { .seg { width: 100%; } .seg button { flex: 1; padding: 6px 8px; } }
+.table-wrap.unlinked table.data th, .table-wrap.unlinked table.data td { text-align: left; white-space: normal; vertical-align: top; }
+.table-wrap.unlinked table.data td:nth-child(1), .table-wrap.unlinked table.data td:nth-child(3), .table-wrap.unlinked table.data td:nth-child(5) { white-space: nowrap; }

@@ -1,6 +1,6 @@
 # 환경교육 조사 결과 대시보드 — 그림으로 보는 설명서
 
-배포 주소: **https://raph-alpaca.github.io/eco-dashboard-timeseries/** (이전 판: https://raph-alpaca.github.io/eco-dashboard/) · 영상·팜플렛(`docs/video`, `docs/pamphlet`)은 이전 판(2025 단년도) 기준입니다
+배포 주소: **https://raph-alpaca.github.io/eco-dashboard-timeseries/** (이전 판: https://raph-alpaca.github.io/eco-dashboard/) · 무엇이 달라졌나(2쪽 안내): [whatsnew/](whatsnew/index.html) · 활용 영상(2분 35초): [video/dashboard-guide-2024-2025.mp4](video/dashboard-guide-2024-2025.mp4) · `대시보드_안내영상.mp4`와 팜플렛(`docs/pamphlet`)은 이전 판(2025 단년도) 기준입니다
 
 ## 1. 개요 탭 — 두 조사를 한눈에
 ![개요](images/01-overview.png)
